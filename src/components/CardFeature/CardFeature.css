@@ -1,0 +1,112 @@
+.cardfeature-container {
+    display: flex;
+    gap: 5vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.cardfeature {
+    position: relative;
+    width: 300px;
+    height: 250px;
+    padding: 10px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    color: var(--primary-dark);
+    box-sizing: border-box;
+    text-decoration: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardfeature img {
+    width: 40%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+.cardfeature-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    color: var(--primary-dark);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.cardfeature .cardfeature-description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    text-align: center;
+}
+
+.cardfeature:hover .cardfeature-title {
+    color: transparent;
+    opacity: 0;
+}
+
+.cardfeature:hover .cardfeature-description {
+    opacity: 1;
+    color: #ffffff;
+}
+
+.cardfeature:hover img {
+    opacity: 0;
+}
+
+.cardfeature.comingsoon::before {
+    content: "Segera Hadir";
+    position: absolute;
+    top: 5px;
+    right: -10px;
+    background-color: #ff6347;
+    color: #ffffff;
+    padding: 5px 10px;
+    font-size: 0.75em;
+    font-weight: bold;
+    border-radius: 8px;
+    transform: rotate(25deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+
+.cardfeature:hover {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+}
+
+.cardfeature-description {
+    font-size: 1em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+}
+
+.cardfeature-status {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .cardfeature-title {
+        font-size: 1em;
+    }
+
+    .cardfeature-description,
+    .cardfeature-status {
+        font-size: 0.75em;
+    }
+}

@@ -1,0 +1,143 @@
+#my-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: var(--primary-blue);
+    color: #333;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+  }
+  
+  .logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .nav-menu ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-menu a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    position: relative;
+    padding: 5px;
+    font-weight: 700;
+  }
+  
+  .nav-menu a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+  }
+
+  .nav-shadow {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }  
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger.is-active span:nth-child(1) {
+    transform: rotate(45deg);
+    position: absolute;
+  }
+  
+  .hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.is-active span:nth-child(3) {
+    transform: rotate(-45deg);
+    position: absolute;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: var(--background-color);
+      width: 100%;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px 20px;
+    }
+  
+    .nav-menu ul {
+      flex-direction: column;
+      gap: 15px;
+      padding: 0;
+    }
+  
+    .nav-menu ul li {
+      width: 100%;
+      border-bottom: 1px solid #ccc;
+      padding: 5px 0;
+    }
+  
+    .nav-menu ul li:last-child {
+      border-bottom: none;
+    }
+  
+    .nav-menu a {
+      color: #000;
+      font-weight: 500;
+      padding: 10px 0;
+      display: block;
+      width: 100%;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  
+    .nav-menu.active {
+      display: block;
+      margin-top: 32px;
+    }
+
+    .nav-menu.nav-menu.active a:hover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background-color: #000;
+    }
+  }

@@ -1,0 +1,43 @@
+.benefits-container {
+  background: linear-gradient(135deg, rgba(0, 132, 204, 1), rgba(0, 132, 204, 0.5));
+  padding: 4rem;
+  text-align: center;
+  color: #fff;
+}
+
+.benefits-container h2 {
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.benefits-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.benefit {
+  background: #ffffff;
+  color: #333;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit span {
+  font-weight: bold;
+  color: #ff6600;
+  font-size: 1.2rem;
+}
+
+.benefit:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
