@@ -37,7 +37,7 @@ function ContactPage() {
           <div className="my-contact-form">
             <div className="form-content">
               <div className="form-image">
-                <img src="/img/logo512.png" alt="Hubungi Kami" />
+                <img src="/img/contact.svg" alt="Hubungi Kami" />
               </div>
               <div className="form-fields">
                 <form>

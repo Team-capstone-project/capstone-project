@@ -6,6 +6,7 @@ import CardFeature from '../../components/CardFeature/CardFeature';
 import SliderPost from '../../components/SliderPost/SliderPost';
 import Faq from '../../components/Faq/Faq';
 import Benefits from '../../components/Benefits/Benefits';
+import Materi from '../../components/Materi/Materi';
 import materipopuler from '../../assets/data/materipopuler.json';
 import cardfeatureData from '../../assets/data/cardfeature.json';
 
@@ -29,6 +30,7 @@ function Home() {
           <Benefits />
         <div className="home-container">
           <h2 className="section-title">Daftar Materi</h2>
+          <Materi />
         </div>
         <SliderPost posts={materipopuler} />
         <div className="home-container">

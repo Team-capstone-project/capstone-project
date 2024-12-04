@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import './AboutPage.css';
 import HomeAbout from '../../components/HomeAbout/HomeAbout';
+import FlipCard from '../../components/FlipCard/FlipCard';
 
 function AboutPage() {
     return (
@@ -17,6 +18,7 @@ function AboutPage() {
             </nav>
             <HomeAbout />
             <h2 className="section-title">Tim Capstone</h2>
+           <FlipCard />
           </div>
         </div>
       </HelmetProvider>
