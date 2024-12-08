@@ -1,0 +1,132 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .signup-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .signup-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e8f4ff;
+  }
+  
+  .signup-image .image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .signup-form {
+    flex: 1;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .signup-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+    outline: none;
+  }
+  
+  .input-group input:focus {
+    border-color: var(--primary-blue);
+  }
+  
+  .signup-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-blue);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .signup-btn:hover {
+    background-color: var(--secondary-blue);
+  }
+  
+  .login-link {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .login-link a {
+    color: var(--primary-blue);
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .signup-card {
+      flex-direction: column;
+    }
+  
+    .signup-image {
+      display: none;
+    }
+  
+    .signup-form {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .signup-title {
+      font-size: 20px;
+    }
+  
+    .input-group input {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .signup-btn {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
