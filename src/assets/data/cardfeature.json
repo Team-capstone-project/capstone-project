@@ -3,21 +3,18 @@
       "title": "Materi Pembelajaran",
       "description": "Temukan berbagai macam materi pembelajaran pada jenjang sekolah menengah",
       "status": "normal",
-      "link": "/login",
       "imageUrl": "/img/materi-pembelajaran.png"
     },
     {
       "title": "Bank Soal",
       "description": "Cari berbagai bentuk cotoh soal untuk memperdalam konsep",
       "status": "comingsoon",
-      "link": "#",
       "imageUrl": "/img/bank-soal.png"
     },
     {
       "title": "Kuis Pengetahuan",
       "description": "Mulailah berlatih untuk menguji pemahamanmu terkait materi yang telah dipelajari",
       "status": "comingsoon",
-      "link": "#",
       "imageUrl": "/img/kuis-pengetahuan.png"
     }
   ]

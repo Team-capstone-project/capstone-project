@@ -55,7 +55,10 @@ function HeroSection () {
       <div className="hero-content">
         <h1>Selamat Datang di Edudu</h1>
         <p>Platform digital sebagai pendamping untuk membuat belajarmu menjadi semakin seru!</p>
-        <button className="hero-button" onClick={scrollToHomeContainer}>Mulai Belajar</button>
+        <div className="btn-hero-content">
+          <button className="hero-button" onClick={scrollToHomeContainer}>Mulai Belajar</button>
+          <button className="hero-button" onClick={() => window.location.href = '/login'}>Masuk ke LMS</button>
+        </div>
       </div>
     </section>
   );

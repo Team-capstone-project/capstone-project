@@ -23,7 +23,7 @@ function Home() {
           <h2 className="section-title">Telusuri Edudu</h2>
           <div className="cardfeature-container">
             {cardfeatureData.map((card, index) => (
-              <CardFeature key={index} title={card.title} description={card.description} status={card.status} link={card.link} imageUrl={card.imageUrl}/>
+              <CardFeature key={index} title={card.title} description={card.description} status={card.status} imageUrl={card.imageUrl}/>
             ))}
           </div>
         </div>

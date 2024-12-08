@@ -35,6 +35,12 @@
   animation-delay: 0.2s;
 }
 
+.btn-hero-content {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
 .hero-button {
   background-color: var(--primary-yellow);
   color: var(--primary-dark);

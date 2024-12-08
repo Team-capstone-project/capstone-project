@@ -1,76 +1,81 @@
 .my-materi-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.my-materi {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
+.materi-item {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.materi-image-container {
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.materi-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.materi-text {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.materi-item h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.materi-item p {
+  font-size: 1em;
+  color: #555;
+}
+
+@media screen and (max-width: 768px) {
   .my-materi {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
-  }
-  
-  .materi-item {
-    display: flex;
-    align-items: center;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .materi-image-container {
-    margin-right: 20px;
-  }
-  
-  .materi-image {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    border-radius: 8px;
-  }
-  
-  .materi-text {
-    flex-grow: 1;
-  }
-  
-  .materi-item h3 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-  }
-  
-  .materi-item p {
-    font-size: 1em;
-    color: #555;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .my-materi {
       grid-template-columns: repeat(2, 1fr);
-    }
-    .materi-item {
+  }
+  .materi-item {
       flex-direction: column;
       text-align: center;
-    }
-    .materi-image-container {
+  }
+  .materi-image-container {
       margin-right: 0;
       margin-bottom: 10px;
-    }
   }
-  
-  @media screen and (max-width: 480px) {
-    .my-materi {
+}
+
+@media screen and (max-width: 480px) {
+  .my-materi {
       grid-template-columns: 1fr;
-    }
-    .materi-item {
+  }
+  .materi-item {
       flex-direction: column;
       text-align: center;
-    }
-    .materi-image-container {
+  }
+  .materi-image-container {
       margin-right: 0;
       margin-bottom: 10px;
-    }
   }
-  
+}

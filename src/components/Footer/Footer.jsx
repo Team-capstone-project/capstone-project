@@ -15,6 +15,7 @@ function Footer() {
                         <a href="/">Beranda</a>
                         <a href="/tentang-kami">Tentang Kami</a>
                         <a href="/hubungi-kami">Hubungi Kami</a>
+                        <a href="/login">LMS Edudu</a>
                     </div>
                 </div>
                 <div className="footer-socials">
