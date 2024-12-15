@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Faq.css';
-import DataFaq from '../../assets/data/faq.json';
+import { faqEdudu } from '../../assets/data/data.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,7 +14,7 @@ function Faq () {
   return (
     <div className="faq-container">
       <div className="my-faq">
-        {DataFaq.map((item, index) => (
+        {faqEdudu.map((item, index) => (
           <div key={index} className="faq-item">
             <div className="faq-question" onClick={() => toggleAnswer(index)}>
               <FontAwesomeIcon icon={faChevronRight} className="faq-icon" />

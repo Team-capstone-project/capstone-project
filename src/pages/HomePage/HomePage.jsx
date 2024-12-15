@@ -7,8 +7,7 @@ import SliderPost from '../../components/SliderPost/SliderPost';
 import Faq from '../../components/Faq/Faq';
 import Benefits from '../../components/Benefits/Benefits';
 import Materi from '../../components/Materi/Materi';
-import materipopuler from '../../assets/data/materipopuler.json';
-import cardfeatureData from '../../assets/data/cardfeature.json';
+import { featureEdudu, materiPopuler } from '../../assets/data/data.json';
 
 function Home() {
   return (
@@ -22,7 +21,7 @@ function Home() {
         <div className="home-container" id="home-container">
           <h2 className="section-title">Telusuri Edudu</h2>
           <div className="cardfeature-container">
-            {cardfeatureData.map((card, index) => (
+            {featureEdudu.map((card, index) => (
               <CardFeature key={index} title={card.title} description={card.description} status={card.status} imageUrl={card.imageUrl}/>
             ))}
           </div>
@@ -32,7 +31,7 @@ function Home() {
           <h2 className="section-title">Daftar Materi</h2>
           <Materi />
         </div>
-        <SliderPost posts={materipopuler} />
+        <SliderPost posts={materiPopuler} />
         <div className="home-container">
           <h2 className="section-title">Informasi Penting</h2>
           <Faq />

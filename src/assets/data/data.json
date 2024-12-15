@@ -1,0 +1,265 @@
+{
+    "featureEdudu": [
+    {
+        "title": "Materi Pembelajaran",
+        "description": "Temukan berbagai macam materi pembelajaran pada jenjang sekolah menengah",
+        "status": "normal",
+        "imageUrl": "/img/materi-pembelajaran.png"
+    },
+    {
+        "title": "Kuis Pengetahuan",
+        "description": "Mulailah berlatih untuk menguji pemahamanmu terkait materi yang telah dipelajari",
+        "status": "normal",
+        "imageUrl": "/img/kuis-pengetahuan.png"
+    },
+    {
+        "title": "Bank Soal",
+        "description": "Cari berbagai bentuk cotoh soal untuk memperdalam konsep",
+        "status": "comingsoon",
+        "imageUrl": "/img/bank-soal.png"
+    }
+    ],
+
+    "faqEdudu": [
+      {
+        "question": "Apa itu Edudu?",
+        "answer": "Edudu adalah platform edukatif yang menyediakan materi pembelajaran berkualitas bagi seluruh pelajar di Indonesia"
+      }
+    ],
+
+    "quotesData": [
+      { "id": 932718394020, "text": "Belajar adalah investasi terbaik untuk masa depan." },
+      { "id": 927746478299, "text": "Jangan takut gagal, karena kegagalan adalah awal keberhasilan." },
+      { "id": 927464829930, "text": "Usaha tidak akan mengkhianati hasil." },
+      { "id": 910274683999, "text": "Jadikan setiap hari peluang untuk belajar hal baru." },
+      { "id": 902736389190, "text": "Pendidikan adalah paspor ke masa depan." }
+    ],
+
+    "materiPopuler": [
+      {
+        "id": 1,
+        "title": "Sistem Persamaan Linear Dua Variabel",
+        "date": "2024-12-01",
+        "image": "/img/spldv.png",
+        "url": "student/content/view?id=1",
+        "subject": "Matematika",
+        "gradeLevel": "SMP"
+      },
+      {
+        "id": 2,
+        "title": "Pesawat Sederhana",
+        "date": "2024-12-02",
+        "image": "/img/katrol.png",
+        "url": "student/content/view?id=2",
+        "subject": "IPA",
+        "gradeLevel": "SMP"
+      },
+      {
+        "id": 3,
+        "title": "Eksponen dan Logaritma",
+        "date": "2024-12-01",
+        "image": "/img/eksponen.png",
+        "url": "student/content/view?id=3",
+        "subject": "Matematika",
+        "gradeLevel": "SMA"
+      },
+      {
+        "id": 4,
+        "title": "Sistem Klasifikasi Makhluk Hidup",
+        "date": "2024-12-02",
+        "image": "/img/makhlukhidup.png",
+        "url": "student/content/view?id=4",
+        "subject": "Biologi",
+        "gradeLevel": "SMA"
+      },
+      {
+        "id": 5,
+        "title": "Stoikiometri",
+        "date": "2024-12-01",
+        "image": "/img/stoikiometri.png",
+        "url": "student/content/view?id=5",
+        "subject": "Kimia",
+        "gradeLevel": "SMA"
+      }
+    ],
+
+    "dataContent": [
+      {
+        "id": 1,
+        "title": "Sistem Persamaan Linear Dua Variabel",
+        "date": "2024-12-01",
+        "image": "/img/spldv.png",
+        "url": "content/view?id=1",
+        "subject": "Matematika",
+        "gradeLevel": "SMP",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+      },
+      {
+        "id": 2,
+        "title": "Pesawat Sederhana",
+        "date": "2024-12-02",
+        "image": "/img/katrol.png",
+        "url": "content/view?id=2",
+        "subject": "IPA",
+        "gradeLevel": "SMP",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+      },
+      {
+        "id": 3,
+        "title": "Eksponen dan Logaritma",
+        "date": "2024-12-01",
+        "image": "/img/eksponen.png",
+        "url": "content/view?id=3",
+        "subject": "Matematika",
+        "gradeLevel": "SMA",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+      },
+      {
+        "id": 4,
+        "title": "Sistem Klasifikasi Makhluk Hidup",
+        "date": "2024-12-02",
+        "image": "/img/makhlukhidup.png",
+        "url": "content/view?id=4",
+        "subject": "Biologi",
+        "gradeLevel": "SMA",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+      },
+      {
+        "id": 5,
+        "title": "Stoikiometri",
+        "date": "2024-12-01",
+        "image": "/img/stoikiometri.png",
+        "url": "content/view?id=5",
+        "subject": "Kimia",
+        "gradeLevel": "SMA",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+      }
+    ],
+
+    "quizData": [
+      {
+        "id": 1,
+        "title": "Sistem Persamaan Linear Dua Variabel",
+        "totalQuestions": 10,
+        "questions": [
+          {
+            "question": "Apa yang dimaksud dengan sistem persamaan linear dua variabel?",
+            "answers": {
+              "A": "Sistem persamaan yang hanya melibatkan satu variabel",
+              "B": "Sistem persamaan yang melibatkan dua variabel dan dua persamaan",
+              "C": "Sistem persamaan yang melibatkan lebih dari dua variabel",
+              "D": "Sistem persamaan yang hanya memiliki satu solusi"
+            },
+            "correctAnswer": "B"
+          },
+          {
+            "question": "Berapa solusi yang dimiliki oleh sistem persamaan linear dua variabel?",
+            "answers": {
+              "A": "Satu solusi",
+              "B": "Dua solusi",
+              "C": "Tidak ada solusi",
+              "D": "Bisa lebih dari dua solusi"
+            },
+            "correctAnswer": "A"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Larutan dan Senyawa",
+        "totalQuestions": 15,
+        "questions": [
+          {
+            "question": "Apa perbedaan antara larutan dan senyawa?",
+            "answers": {
+              "A": "Larutan adalah campuran homogen, senyawa adalah hasil reaksi kimia",
+              "B": "Larutan adalah hasil reaksi kimia, senyawa adalah campuran homogen",
+              "C": "Larutan hanya terdiri dari satu jenis molekul, senyawa terdiri dari beberapa jenis molekul",
+              "D": "Larutan selalu cair, senyawa bisa padat atau cair"
+            },
+            "correctAnswer": "A"
+          },
+          {
+            "question": "Apa yang dimaksud dengan larutan elektrolit?",
+            "answers": {
+              "A": "Larutan yang tidak dapat menghantarkan listrik",
+              "B": "Larutan yang dapat menghantarkan listrik",
+              "C": "Larutan yang mengandung senyawa ionik",
+              "D": "Larutan yang mengandung gas terlarut"
+            },
+            "correctAnswer": "B"
+          }
+        ]
+      }
+    ],
+
+    "dataGuru": [
+      {
+        "id": 1,
+        "nama": "John Doe",
+        "email": "johndoe@edudu.com",
+        "status": "Aktif",
+        "password": "password123"
+      },
+      {
+        "id": 2,
+        "nama": "Jane Smith",
+        "email": "janesmith@edudu.com",
+        "status": "Non-Aktif",
+        "password": "password456"
+      },
+      {
+        "id": 3,
+        "nama": "Michael Johnson",
+        "email": "michaelj@edudu.com",
+        "status": "Aktif",
+        "password": "password789"
+      }
+    ],
+
+    "dataSiswa": [
+      {
+        "id": 1,
+        "nama": "Andi Saputra",
+        "sekolah": "SMP Negeri 1 Jakarta",
+        "email": "andisaputra@edudu.com",
+        "password": "password123"
+      },
+      {
+        "id": 2,
+        "nama": "Siti Rahmawati",
+        "sekolah": "SMA Negeri 2 Surabaya",
+        "email": "sitirahmawati@edudu.com",
+        "password": "password456"
+      },
+      {
+        "id": 3,
+        "nama": "Budi Santoso",
+        "sekolah": "SMP Negeri 3 Bandung",
+        "email": "budisantoso@edudu.com",
+        "password": "password789"
+      },
+      {
+        "id": 4,
+        "nama": "Nina Puspitasari",
+        "sekolah": "SMA Negeri 1 Yogyakarta",
+        "email": "ninapuspitasari@edudu.com",
+        "password": "password101"
+      },
+      {
+        "id": 5,
+        "nama": "Rudi Hartono",
+        "sekolah": "SMP Negeri 2 Semarang",
+        "email": "rudihartono@edudu.com",
+        "password": "password202"
+      },
+      {
+        "id": 6,
+        "nama": "Lina Marlina",
+        "sekolah": "SMA Negeri 3 Medan",
+        "email": "linamarlina@edudu.com",
+        "password": "password303"
+      }
+    ]
+  }
+  
