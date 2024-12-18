@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import TableWithSearch from "../../components/Table/TableWithSearch";
 import { quizData as initialQuizData } from "../../assets/data/data.json";
 import Preloader from "../../components/Preloader/Preloader";
-import './Teacher.css';
+import './Admin.css';
 
-const Teacher_SetQuiz = () => {
+const Admin_SetQuiz = () => {
   const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState(initialQuizData);
   const [editingQuiz, setEditingQuiz] = useState(null); // Kuis yang sedang diedit
@@ -51,7 +51,7 @@ const Teacher_SetQuiz = () => {
         <button className="delete" onClick={() => handleDelete(quiz)}>Hapus</button>
         <button
           className="edit-detail"
-          onClick={() => navigate(`/teacher/setting_quiz/edit?id=${quiz.id}`)} // Arahkan ke halaman edit detail
+          onClick={() => navigate(`/admin/setting_quiz/edit?id=${quiz.id}`)} // Arahkan ke halaman edit detail
         >
           Edit Konten
         </button>
@@ -111,7 +111,7 @@ const Teacher_SetQuiz = () => {
       <div className="lms-container">
         <h2 className="section-title">Manajemen Kuis</h2>
 
-        <form onSubmit={handleFormSubmit} className="teacher-form">
+        <form onSubmit={handleFormSubmit} className="admin-form">
           <input type="text" name="title" value={formQuiz.title} onChange={handleFormChange} placeholder="Judul Kuis" required />
           <input type="number" name="totalQuestions" value={formQuiz.totalQuestions} onChange={handleFormChange} placeholder="Jumlah Soal" required />
           <button type="submit" className="submit">
@@ -130,4 +130,4 @@ const Teacher_SetQuiz = () => {
   );
 };
 
-export default Teacher_SetQuiz;
+export default Admin_SetQuiz;

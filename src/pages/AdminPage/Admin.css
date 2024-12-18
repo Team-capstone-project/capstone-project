@@ -7,15 +7,18 @@
 
 .admin-form input,
 .admin-form select,
-.admin-form button {
+.admin-form button,
+.admin-form textarea {
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
 }
 
 .admin-form input:focus,
-.admin-form select:focus {
+.admin-form select:focus,
+.admin-form textarea:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
@@ -41,4 +44,24 @@
 
 .admin-form button.cancel:hover {
   background-color: #c82333;
+}
+
+.admin-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.admin-form select {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  margin-bottom: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
 }

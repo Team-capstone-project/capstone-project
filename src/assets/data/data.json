@@ -193,30 +193,6 @@
       }
     ],
 
-    "dataGuru": [
-      {
-        "id": 1,
-        "nama": "John Doe",
-        "email": "johndoe@edudu.com",
-        "status": "Aktif",
-        "password": "password123"
-      },
-      {
-        "id": 2,
-        "nama": "Jane Smith",
-        "email": "janesmith@edudu.com",
-        "status": "Non-Aktif",
-        "password": "password456"
-      },
-      {
-        "id": 3,
-        "nama": "Michael Johnson",
-        "email": "michaelj@edudu.com",
-        "status": "Aktif",
-        "password": "password789"
-      }
-    ],
-
     "dataSiswa": [
       {
         "id": 1,
@@ -259,6 +235,20 @@
         "sekolah": "SMA Negeri 3 Medan",
         "email": "linamarlina@edudu.com",
         "password": "password303"
+      },
+      {
+        "id": 7,
+        "nama": "Sesa Susanti",
+        "sekolah": "SMA Negeri 3 Medan",
+        "email": "sesasusanti@edudu.com",
+        "password": "password828"
+      },
+      {
+        "id": 8,
+        "nama": "Boaz Kurnia",
+        "sekolah": "SMA Negeri 1 Yogyakarta",
+        "email": "boazkurnia@edudu.com",
+        "password": "password003"
       }
     ]
   }

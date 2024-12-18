@@ -8,13 +8,11 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 
 import AdminPage from './pages/AdminPage/AdminPage';
-import Admin_SetTeacher from './pages/AdminPage/Admin_SetTeacher';
 import Admin_SetStudent from './pages/AdminPage/Admin_SetStudent';
-import TeacherPage from './pages/TeacherPage/TeacherPage';
-import Teacher_SetContent from './pages/TeacherPage/Teacher_SetContent';
-import Teacher_EditContent from './pages/TeacherPage/Teacher_EditContent';
-import Teacher_SetQuiz from './pages/TeacherPage/Teacher_SetQuiz';
-import Teacher_EditQuiz from './pages/TeacherPage/Teacher_EditQuiz';
+import Admin_SetContent from './pages/AdminPage/Admin_SetContent';
+import AdminEditContent from './pages/AdminPage/Admin_EditContent';
+import Admin_SetQuiz from './pages/AdminPage/Admin_SetQuiz';
+import AdminEditQuiz from './pages/AdminPage/Admin_EditQuiz';
 import StudentPage from './pages/StudentPage/StudentPage';
 import StudentContent from './pages/StudentPage/StudentContent';
 import Student_ViewContent from './pages/StudentPage/Student_ViewContent';
@@ -39,15 +37,11 @@ function App() {
 
           {/*Rute Admin*/}
           <Route path="/admin" element={<><Navbar role="admin" /><AdminPage /></>} />
-          <Route path="/admin/setting_teacher" element={<><Navbar role="admin" /><Admin_SetTeacher /></>} />
           <Route path="/admin/setting_student" element={<><Navbar role="admin" /><Admin_SetStudent /></>} />
-
-          {/*Rute Teacher*/}
-          <Route path="/teacher" element={<><Navbar role="teacher" /><TeacherPage /></>} />
-          <Route path="/teacher/setting_content" element={<><Navbar role="teacher" /><Teacher_SetContent /></>} />
-          <Route path="/teacher/setting_content/edit" element={<><Navbar role="teacher" /><Teacher_EditContent /></>} />
-          <Route path="/teacher/setting_quiz" element={<><Navbar role="teacher" /><Teacher_SetQuiz /></>} />
-          <Route path="/teacher/setting_quiz/edit" element={<><Navbar role="teacher" /><Teacher_EditQuiz /></>} />
+          <Route path="/admin/setting_content" element={<><Navbar role="admin" /><Admin_SetContent /></>} />
+          <Route path="/admin/setting_content/edit" element={<><Navbar role="admin" /><AdminEditContent /></>} />
+          <Route path="/admin/setting_quiz" element={<><Navbar role="admin" /><Admin_SetQuiz /></>} />
+          <Route path="/admin/setting_quiz/edit" element={<><Navbar role="admin" /><AdminEditQuiz /></>} />
 
           {/*Rute Student*/}
           <Route path="/student" element={<><Navbar role="student" /><StudentPage /></>} />

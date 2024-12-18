@@ -35,17 +35,9 @@ function Navbar({ role }) {
       return (
         <ul>
           <li><a href="/admin">Dashboard</a></li>
-          <li><a href="/admin/setting_teacher">Guru</a></li>
           <li><a href="/admin/setting_student">Siswa</a></li>
-          <li><a href="/">Keluar</a></li>
-        </ul>
-      );
-    } else if (role === 'teacher') {
-      return (
-        <ul>
-          <li><a href="/teacher">Dashboard</a></li>
-          <li><a href="/teacher/setting_content">Konten Materi</a></li>
-          <li><a href="/teacher/setting_quiz">Kuis</a></li>
+          <li><a href="/admin/setting_content">Konten Materi</a></li>
+          <li><a href="/admin/setting_quiz">Kuis</a></li>
           <li><a href="/">Keluar</a></li>
         </ul>
       );

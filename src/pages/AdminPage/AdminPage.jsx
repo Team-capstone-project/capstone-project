@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { dataContent, dataGuru, dataSiswa } from "../../assets/data/data.json";
+import { dataContent, dataSiswa } from "../../assets/data/data.json";
 import Preloader from "../../components/Preloader/Preloader";
 
 const AdminPage = () => {
   // Menghitung jumlah data
   const jumlahMateri = dataContent.length;
-  const jumlahGuru = dataGuru.length;
+  const jumlahSekolah = new Set(dataSiswa.map((siswa) => siswa.sekolah)).size;
   const jumlahSiswa = dataSiswa.length;
 
   // State untuk preloader
@@ -25,9 +25,9 @@ const AdminPage = () => {
     <div className="pages-container">
       <div className="lms-container">
         <div className="dashboard-container">
-          <DashboardCard title="Jumlah Materi" count={`${jumlahMateri} Judul`} />
-          <DashboardCard title="Jumlah Guru" count={jumlahGuru} />
-          <DashboardCard title="Jumlah Siswa" count={jumlahSiswa} />
+          <DashboardCard title="Total Materi" count={`${jumlahMateri} Judul`} />
+          <DashboardCard title="Sekolah Terdaftar" count={`${jumlahSekolah} Sekolah`} />
+          <DashboardCard title="Siswa Terdaftar" count={`${jumlahSiswa} Siswa`} />
         </div>
       </div>
     </div>

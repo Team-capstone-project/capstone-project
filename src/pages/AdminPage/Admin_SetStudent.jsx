@@ -108,7 +108,7 @@ const Admin_SetStudent = () => {
   return (
     <div className="pages-container">
       <div className="lms-container">
-        <h2 className="section-title">Pengaturan Siswa</h2>
+        <h2 className="section-title">Manajemen Siswa</h2>
 
         {/* Form Tambah/Edit Siswa */}
         <form onSubmit={handleFormSubmit} className="admin-form">

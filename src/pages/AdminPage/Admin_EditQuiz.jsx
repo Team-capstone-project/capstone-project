@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { quizData as initialQuizData } from "../../assets/data/data.json";
-import "./Teacher.css";
+import "./Admin.css";
 
-const TeacherEditQuiz = () => {
+const AdminEditQuiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,7 +24,7 @@ const TeacherEditQuiz = () => {
       setFormQuestions(selectedQuiz.questions);
     } else {
       alert("Kuis tidak ditemukan!");
-      navigate("/teacher/setting_quiz");
+      navigate("/admin/setting_quiz");
     }
   }, [location.search, navigate]);
 
@@ -73,7 +73,7 @@ const TeacherEditQuiz = () => {
     const updatedQuiz = { ...quiz, questions: formQuestions };
 
     alert(`Kuis "${quiz.title}" telah diperbarui.`);
-    navigate("/teacher/setting_quiz");
+    navigate("/admin/setting_quiz");
   };
 
   if (!quiz) {
@@ -85,7 +85,7 @@ const TeacherEditQuiz = () => {
       <div className="lms-container">
         <h2 className="section-title">Edit Kuis: {quiz.title}</h2>
 
-        <form onSubmit={handleFormSubmit} className="teacher-form">
+        <form onSubmit={handleFormSubmit} className="admin-form">
           {formQuestions.map((question, index) => (
             <div key={index} className="question-block">
               <h3>Pertanyaan {index + 1}</h3>
@@ -117,7 +117,7 @@ const TeacherEditQuiz = () => {
             <button type="submit" className="submit">
               Perbarui Kuis
             </button>
-            <button type="button" onClick={() => navigate("/teacher/setting_quiz")} className="cancel">
+            <button type="button" onClick={() => navigate("/admin/setting_quiz")} className="cancel">
               Batal
             </button>
           </div>
@@ -127,4 +127,4 @@ const TeacherEditQuiz = () => {
   );
 };
 
-export default TeacherEditQuiz;
+export default AdminEditQuiz;

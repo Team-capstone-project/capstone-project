@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import TableWithSearch from "../../components/Table/TableWithSearch";
 import { dataContent as initialDataContent } from "../../assets/data/data.json";
 import Preloader from "../../components/Preloader/Preloader";
-import "./Teacher.css";
+import "./Admin.css";
 
-const Teacher_SetContent = () => {
+const Admin_SetContent = () => {
   const [loading, setLoading] = useState(true);
   const [dataContent, setDataContent] = useState(initialDataContent);
   const [editingContent, setEditingContent] = useState(null);
@@ -54,7 +54,7 @@ const Teacher_SetContent = () => {
         <button className="delete" onClick={() => handleDelete(content)}>Hapus</button>
         <button
           className="edit-detail"
-          onClick={() => navigate(`/teacher/setting_content/edit?id=${content.id}`)}
+          onClick={() => navigate(`/admin/setting_content/edit?id=${content.id}`)}
         >
           Edit Konten
         </button>
@@ -133,7 +133,7 @@ const Teacher_SetContent = () => {
     <div className="pages-container">
       <div className="lms-container">
         <h2 className="section-title">Manajemen Konten</h2>
-        <form onSubmit={handleFormSubmit} className="teacher-form">
+        <form onSubmit={handleFormSubmit} className="admin-form">
           <input type="text" name="title" value={formContent.title} onChange={handleFormChange} placeholder="Judul Konten" required />
           <input type="text" name="subject" value={formContent.subject} onChange={handleFormChange} placeholder="Mata Pelajaran" required />
           <input type="text" name="gradeLevel" value={formContent.gradeLevel} onChange={handleFormChange} placeholder="Jenjang" required />
@@ -160,4 +160,4 @@ const Teacher_SetContent = () => {
   );
 };
 
-export default Teacher_SetContent;
+export default Admin_SetContent;

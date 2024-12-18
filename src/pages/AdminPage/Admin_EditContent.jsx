@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dataContent as initialDataContent } from "../../assets/data/data.json";
 
-const TeacherEditContent = () => {
+const AdminEditContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const TeacherEditContent = () => {
 
   const handleSaveChanges = () => {
     console.log("Changes saved:", dataContent);
-    navigate('/teacher/setting_content'); // Mengarahkan kembali ke halaman pengaturan
+    navigate('/admin/setting_content'); // Mengarahkan kembali ke halaman pengaturan
   };
 
   if (!currentItem) {
@@ -53,8 +53,8 @@ const TeacherEditContent = () => {
         <p>
           <strong>Grade Level:</strong> {currentItem.gradeLevel}
         </p>
-        <textarea value={currentItem.content} onChange={(e) => handleContentChange(e.target.value)} rows={5} className="teacher-edit-textarea" />
-        <button onClick={handleSaveChanges} className="teacher-save-button">
+        <textarea value={currentItem.content} onChange={(e) => handleContentChange(e.target.value)} rows={5} className="admin-edit-textarea" />
+        <button onClick={handleSaveChanges} className="admin-save-button">
           Simpan
         </button>
       </div>
@@ -62,4 +62,4 @@ const TeacherEditContent = () => {
   );
 };
 
-export default TeacherEditContent;
+export default AdminEditContent;
