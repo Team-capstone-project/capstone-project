@@ -4,7 +4,8 @@ import './SignupPage.css';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -35,12 +36,12 @@ const SignupPage = () => {
             <h2 className="signup-title">Daftar LMS Edudu</h2>
             <form onSubmit={handleSubmit}>
               <div className="input-group">
-                <label htmlFor="name">Nama Depan</label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+                <label htmlFor="firstname">Nama Depan</label>
+                <input type="text" id="firstname" name="firstname" value={formData.firstname} onChange={handleChange} required />
               </div>
               <div className="input-group">
-                <label htmlFor="name">Nama Belakang</label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+                <label htmlFor="lastname">Nama Belakang</label>
+                <input type="text" id="lastname" name="lastname" value={formData.lastname} onChange={handleChange} required />
               </div>
               <div className="input-group">
                 <label htmlFor="email">Email</label>
