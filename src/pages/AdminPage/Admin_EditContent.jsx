@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dataContent as initialDataContent } from "../../assets/data/data.json";
+import EditorText from '../../components/EditorText/EditorText';
+import { BlockMath, InlineMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 const AdminEditContent = () => {
   const location = useLocation();
@@ -53,7 +56,7 @@ const AdminEditContent = () => {
         <p>
           <strong>Grade Level:</strong> {currentItem.gradeLevel}
         </p>
-        <textarea value={currentItem.content} onChange={(e) => handleContentChange(e.target.value)} rows={5} className="admin-edit-textarea" />
+        <EditorText content={currentItem.content} onContentChange={handleContentChange} />
         <button onClick={handleSaveChanges} className="admin-save-button">
           Simpan
         </button>

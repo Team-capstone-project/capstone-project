@@ -26,12 +26,14 @@
 
 .article-content p {
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .article-content img {
   max-width: 100%;
   height: auto;
-  margin-top: 20px;
+  display: block;
+  margin: 20px auto;
 }
 
 .article-footer {

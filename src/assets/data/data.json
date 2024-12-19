@@ -92,7 +92,7 @@
         "url": "content/view?id=1",
         "subject": "Matematika",
         "gradeLevel": "SMP",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+        "content": "<p>Sistem Persamaan Linier Dua Variabel (SPLDV) adalah salah satu materi dasar dalam matematika yang sering digunakan dalam berbagai bidang, seperti ekonomi, teknik, dan ilmu komputer. Pada dasarnya, SPLDV adalah sistem yang terdiri dari dua persamaan linier yang melibatkan dua variabel yang tidak diketahui. Tujuan utama dalam menyelesaikan SPLDV adalah mencari nilai dari kedua variabel tersebut.</p><h2>Apa Itu SPLDV?</h2><p>SPLDV adalah sistem yang terdiri dari dua persamaan linier dengan dua variabel. Sebuah persamaan linier adalah persamaan yang memiliki bentuk umum:</p><p>$ax + by = c$</p><p>Di mana:<br/>a, b, dan c adalah konstanta<br/>x dan y adalah variabel</p><p>Contoh:<br/>$2x + 3y = 11$</p><h2>Metode Penyelesaian SPLDV</h2><p>Ada beberapa metode yang dapat digunakan untuk menyelesaikan SPLDV. Berikut adalah metode-metode utama yang sering digunakan:<ol type=1><li>Metode Subtitusi<br/>Metode substitusi adalah salah satu metode yang paling sederhana untuk menyelesaikan SPLDV. Pada metode ini, kita menyelesaikan salah satu persamaan untuk salah satu variabel, lalu substitusikan hasilnya ke dalam persamaan lainnya.</li><li>Metode Eliminasi<br/>Metode eliminasi melibatkan penjumlahan atau pengurangan kedua persamaan untuk menghilangkan salah satu variabel. Metode ini dapat sangat berguna ketika koefisien variabel sudah cocok untuk dieliminasi.</li><li>Metode Grafik<br/>Metode grafik melibatkan menggambar kedua persamaan pada sistem koordinat kartesius dan mencari titik potong dari kedua garis tersebut. Titik potong tersebut adalah solusi dari SPLDV.</li></ol></p><iframe width=560 height=315 src=https://www.youtube.com/embed/kfCnl5AbeeM?si=ThDLkvE0jyBpZw0C title=YouTube video player frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share referrerpolicy=strict-origin-when-cross-origin allowfullscreen></iframe>"
       },
       {
         "id": 2,
@@ -132,7 +132,7 @@
         "url": "content/view?id=5",
         "subject": "Kimia",
         "gradeLevel": "SMA",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+        "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><img src='/img/spldv.png' alt='SPLDV' /><p>More text goes here.</p>"
       }
     ],
 

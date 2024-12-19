@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dataContent } from '../../assets/data/data.json';
 import './Student.css';
+import { InlineMath, BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 const StudentViewContent = () => {
   const location = useLocation();
@@ -32,6 +34,20 @@ const StudentViewContent = () => {
     return <p className="no-content">Materi tidak ditemukan.</p>;
   }
 
+  // Fungsi untuk merender konten dengan LaTeX dan HTML
+  const renderContent = (content) => {
+    // Mengganti ekspresi LaTeX inline dengan komponen InlineMath
+    const parts = content.split(/(\$.*?\$)/g);
+    
+    return parts.map((part, index) => {
+      if (part.startsWith('$') && part.endsWith('$')) {
+        return <InlineMath key={index}>{part.slice(1, -1)}</InlineMath>;
+      } else {
+        return <span key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+      }
+    });
+  };
+
   return (
     <div className="view-container">
       <div className="article-header">
@@ -43,7 +59,7 @@ const StudentViewContent = () => {
       <div className="article-content">
         {post.image && <img src={post.image} alt={post.title} />}
         <p>{post.description}</p>
-        <p>{post.content}</p>
+        <div>{renderContent(post.content)}</div>
       </div>
       <div className="article-footer">
         <button className="back-button" onClick={() => navigate('/student/content')}>
