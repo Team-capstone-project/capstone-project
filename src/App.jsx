@@ -83,7 +83,6 @@ function App() {
           <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
           <Route path="*" element={<NotFound />} />
 
-<<<<<<< HEAD
           {/* Rute Admin */}
           <Route
             path="/admin"
@@ -178,21 +177,6 @@ function App() {
               </PrivateRoute>
             }
           />
-=======
-          {/*Rute Admin*/}
-          <Route path="/admin" element={<><Navbar role="admin" /><AdminPage /></>} />
-          <Route path="/admin/setting_student" element={<><Navbar role="admin" /><Admin_SetStudent /></>} />
-          <Route path="/admin/setting_content" element={<><Navbar role="admin" /><Admin_SetContent /></>} />
-          <Route path="/admin/setting_content/edit" element={<><Navbar role="admin" /><AdminEditContent /></>} />
-          <Route path="/admin/setting_quiz" element={<><Navbar role="admin" /><Admin_SetQuiz /></>} />
-
-          {/*Rute Student*/}
-          <Route path="/student" element={<><Navbar role="student" /><StudentPage /></>} />
-          <Route path="/student/content" element={<><Navbar role="student" /><StudentContent /></>} />
-          <Route path="/student/content/view" element={<><Navbar role="student" /><Student_ViewContent /></>} />
-          <Route path="/student/quiz" element={<><Navbar role="student" /><StudentQuiz /></>} />
-          <Route path="/student/quiz/:title" element={<><Navbar role="student" /><Student_ViewQuiz /></>} />
->>>>>>> origin/main
         </Routes>
       </Router>
     </div>
