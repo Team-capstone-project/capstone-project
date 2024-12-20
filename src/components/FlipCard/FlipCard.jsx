@@ -4,29 +4,29 @@ import './FlipCard.css';
 const FlipCard = () => {
   const data = [
     {
-      image: 'logo512.png',
+      image: '/img/logo_rounded.svg',
       name: 'Celia Maureen Chandra',
       position: 'Project Manager',
       quote: 'Kamu tidak perlu menjadi luar biasa untuk memulai, tapi kamu harus memulai untuk menjadi luar biasa',
     },
     {
-      image: 'logo512.png',
+      image: '/img/logo_rounded.svg',
       name: 'Agusti Mahendra',
       position: 'Front-End Developer',
       quote: 'Kegagalan hanya terjadi bila kita menyerah',
     },
     {
-      image: 'logo512.png',
+      image: '/img/logo_rounded.svg',
       name: 'Fikih Aldiansyah',
       position: 'Back-End Developer',
       quote: 'Hidup itu seperti bersepeda. Jika ingin menjaga keseimbanganmu, kamu harus terus bergerak maju',
     },
     {
-        image: 'logo512.png',
-        name: 'Hizbullah',
-        position: 'Quality Control',
-        quote: 'Setiap orang menjadi guru, setiap rumah menjadi sekolah',
-      }
+      image: '/img/logo_rounded.svg',
+      name: 'Hizbullah',
+      position: 'Quality Control',
+      quote: 'Setiap orang menjadi guru, setiap rumah menjadi sekolah',
+    }
   ];
 
   return (

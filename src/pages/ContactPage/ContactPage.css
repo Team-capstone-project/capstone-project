@@ -61,7 +61,7 @@
 }
 
 .form-image img {
-    width: 100%;
+    width: 65%;
     height: auto;
 }
 
@@ -130,5 +130,10 @@
 
     .form-fields {
         width: 100%;
+    }
+
+    .form-image {
+        width: 100%;
+        height: auto;
     }
 }

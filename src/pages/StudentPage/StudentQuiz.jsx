@@ -3,8 +3,10 @@ import Table from "../../components/Table/Table";
 import Preloader from "../../components/Preloader/Preloader";
 import Alert from "../../components/Alert/Alert";
 import { quizData } from "../../assets/data/data.json";
+import { useNavigate } from "react-router-dom";
 
 const StudentQuiz = () => {
+  const navigate = useNavigate();
   const quizHeaders = ["No", "Topik", "Total Pertanyaan", "Aksi"];
 
   const [alert, setAlert] = useState({
@@ -24,7 +26,7 @@ const StudentQuiz = () => {
   const quizDataWithStartButton = quizData.map((quiz, index) => ({
     No: index + 1,
     Topik: quiz.title,
-    "Total Pertanyaan": quiz.totalQuestions,
+    "Total Pertanyaan": quiz.questions.length,
     Aksi: (
       <button
         onClick={() =>
@@ -33,7 +35,7 @@ const StudentQuiz = () => {
             buttons: [
               {
                 label: "Ya",
-                onClick: () => alert(`Kuis Dimulai: ${quiz.title}`),
+                onClick: () => navigate(`/student/quiz/${quiz.title}`),
               },
               {
                 label: "Tidak",
@@ -58,6 +60,17 @@ const StudentQuiz = () => {
     <div className="pages-container">
       <div className="lms-container">
         <h2 className="section-title">Daftar Kuis</h2>
+        <div className="quiz-instructions">
+          <h3>Cara Pengerjaan Kuis:</h3>
+          <ul>
+            <li>Klik tombol "Mulai" pada kuis yang ingin Anda kerjakan.</li>
+            <li>Pilih "Ya" untuk memulai kuis atau "Tidak" untuk membatalkan.</li>
+            <li>Selesaikan semua pertanyaan yang tersedia dalam waktu yang ditentukan.</li>
+            <li>Setelah selesai, klik "Submit Jawaban".</li>
+            <li>Jawaban tersimpan otomatis jika waktu telah habis.</li>
+          </ul>
+          <p>Tombol "Submit Jawaban" hanya bisa di akses jika seluruh pertanyaan telah terjawab dan tidak ada pertanyaan yang ragu-ragu</p>
+        </div>
         <Table headers={quizHeaders} data={quizDataWithStartButton} />
       </div>
       {alert.visible && <Alert message={alert.message} buttons={alert.buttons} />}
