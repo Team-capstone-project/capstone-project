@@ -92,7 +92,7 @@
         "url": "content/view?id=1",
         "subject": "Matematika",
         "gradeLevel": "SMP",
-        "content": "<p>Sistem Persamaan Linier Dua Variabel (SPLDV) adalah salah satu materi dasar dalam matematika yang sering digunakan dalam berbagai bidang, seperti ekonomi, teknik, dan ilmu komputer. Pada dasarnya, SPLDV adalah sistem yang terdiri dari dua persamaan linier yang melibatkan dua variabel yang tidak diketahui. Tujuan utama dalam menyelesaikan SPLDV adalah mencari nilai dari kedua variabel tersebut.</p><h2>Apa Itu SPLDV?</h2><p>SPLDV adalah sistem yang terdiri dari dua persamaan linier dengan dua variabel. Sebuah persamaan linier adalah persamaan yang memiliki bentuk umum:</p><p>$ax + by = c$</p><p>Di mana:<br/>a, b, dan c adalah konstanta<br/>x dan y adalah variabel</p><p>Contoh:<br/>$2x + 3y = 11$</p><h2>Metode Penyelesaian SPLDV</h2><p>Ada beberapa metode yang dapat digunakan untuk menyelesaikan SPLDV. Berikut adalah metode-metode utama yang sering digunakan:<ol type=1><li>Metode Subtitusi<br/>Metode substitusi adalah salah satu metode yang paling sederhana untuk menyelesaikan SPLDV. Pada metode ini, kita menyelesaikan salah satu persamaan untuk salah satu variabel, lalu substitusikan hasilnya ke dalam persamaan lainnya.</li><li>Metode Eliminasi<br/>Metode eliminasi melibatkan penjumlahan atau pengurangan kedua persamaan untuk menghilangkan salah satu variabel. Metode ini dapat sangat berguna ketika koefisien variabel sudah cocok untuk dieliminasi.</li><li>Metode Grafik<br/>Metode grafik melibatkan menggambar kedua persamaan pada sistem koordinat kartesius dan mencari titik potong dari kedua garis tersebut. Titik potong tersebut adalah solusi dari SPLDV.</li></ol></p><iframe width=560 height=315 src=https://www.youtube.com/embed/kfCnl5AbeeM?si=ThDLkvE0jyBpZw0C title=YouTube video player frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share referrerpolicy=strict-origin-when-cross-origin allowfullscreen></iframe>"
+        "content": "<p>Sistem Persamaan Linier Dua Variabel (SPLDV) adalah salah satu materi dasar dalam matematika yang sering digunakan dalam berbagai bidang, seperti ekonomi, teknik, dan ilmu komputer. Pada dasarnya, SPLDV adalah sistem yang terdiri dari dua persamaan linier yang melibatkan dua variabel yang tidak diketahui. Tujuan utama dalam menyelesaikan SPLDV adalah mencari nilai dari kedua variabel tersebut.</p><h2>Apa Itu SPLDV?</h2><p>SPLDV adalah sistem yang terdiri dari dua persamaan linier dengan dua variabel. Sebuah persamaan linier adalah persamaan yang memiliki bentuk umum:</p><p>$ax + by = c$</p><p>Di mana:<br/>a, b, dan c adalah konstanta<br/>x dan y adalah variabel</p><p>Contoh:<br/>$2x + 3y = 11$</p><h2>Metode Penyelesaian SPLDV</h2><p>Ada beberapa metode yang dapat digunakan untuk menyelesaikan SPLDV. Berikut adalah metode-metode utama yang sering digunakan:<ol type=1><li>Metode Subtitusi<br/>Metode substitusi adalah salah satu metode yang paling sederhana untuk menyelesaikan SPLDV. Pada metode ini, kita menyelesaikan salah satu persamaan untuk salah satu variabel, lalu substitusikan hasilnya ke dalam persamaan lainnya.</li><li>Metode Eliminasi<br/>Metode eliminasi melibatkan penjumlahan atau pengurangan kedua persamaan untuk menghilangkan salah satu variabel. Metode ini dapat sangat berguna ketika koefisien variabel sudah cocok untuk dieliminasi.</li><li>Metode Grafik<br/>Metode grafik melibatkan menggambar kedua persamaan pada sistem koordinat kartesius dan mencari titik potong dari kedua garis tersebut. Titik potong tersebut adalah solusi dari SPLDV.</li></ol></p><iframe width='560' height='315' src='https://www.youtube.com/embed/kfCnl5AbeeM' title='Tanpa berusaha mencari penyelesaiannya, selidikilah di antara SPLDV berikut ini manakah yang memp...' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen style='display: block; margin: 0 auto;'></iframe>"
       },
       {
         "id": 2,
@@ -138,56 +138,52 @@
 
     "quizData": [
       {
-        "id": 1,
-        "title": "Sistem Persamaan Linear Dua Variabel",
-        "totalQuestions": 10,
+        "title": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
         "questions": [
           {
-            "question": "Apa yang dimaksud dengan sistem persamaan linear dua variabel?",
-            "answers": {
-              "A": "Sistem persamaan yang hanya melibatkan satu variabel",
-              "B": "Sistem persamaan yang melibatkan dua variabel dan dua persamaan",
-              "C": "Sistem persamaan yang melibatkan lebih dari dua variabel",
-              "D": "Sistem persamaan yang hanya memiliki satu solusi"
+            "question": "Apa yang dimaksud dengan Sistem Persamaan Linear Dua Variabel (SPLDV)?",
+            "options": {
+              "a": "Sistem persamaan dengan dua variabel yang memiliki satu solusi",
+              "b": "Sistem persamaan dengan dua variabel yang memiliki lebih dari satu solusi",
+              "c": "Sistem persamaan dengan dua variabel yang tidak memiliki solusi",
+              "d": "Sistem persamaan dengan dua variabel yang memiliki solusi tunggal"
             },
-            "correctAnswer": "B"
+            "correctAnswer": "a"
           },
           {
-            "question": "Berapa solusi yang dimiliki oleh sistem persamaan linear dua variabel?",
-            "answers": {
-              "A": "Satu solusi",
-              "B": "Dua solusi",
-              "C": "Tidak ada solusi",
-              "D": "Bisa lebih dari dua solusi"
+            "question": "Bagaimana cara menyelesaikan SPLDV menggunakan metode substitusi?",
+            "options": {
+              "a": "Mengganti nilai salah satu variabel dengan nilai dari persamaan lain",
+              "b": "Menghitung nilai kedua variabel secara bersamaan",
+              "c": "Menggunakan grafik untuk mencari titik potong",
+              "d": "Menghitung nilai variabel pertama dan menggantinya dalam persamaan kedua"
             },
-            "correctAnswer": "A"
+            "correctAnswer": "a"
+          },
+          {
+            "question": "Dalam persamaan 3x + 2y = 10 dan 4x - y = -5, nilai x dan y yang benar adalah:",
+            "options": {
+              "a": "x = 0, y = 5",
+              "b": "x = 3, y = 4",
+              "c": "x = 1, y = 2",
+              "d": "x = 4, y = 3"
+            },
+            "correctAnswer": "a"
           }
         ]
       },
       {
-        "id": 10,
-        "title": "Larutan dan Senyawa",
-        "totalQuestions": 15,
+        "title": "Pesawat Sederhana",
         "questions": [
           {
-            "question": "Apa perbedaan antara larutan dan senyawa?",
-            "answers": {
-              "A": "Larutan adalah campuran homogen, senyawa adalah hasil reaksi kimia",
-              "B": "Larutan adalah hasil reaksi kimia, senyawa adalah campuran homogen",
-              "C": "Larutan hanya terdiri dari satu jenis molekul, senyawa terdiri dari beberapa jenis molekul",
-              "D": "Larutan selalu cair, senyawa bisa padat atau cair"
+            "question": "Apa yang dimaksud dengan pesawat sederhana?",
+            "options": {
+              "a": "Alat yang digunakan untuk mempercepat pekerjaan dengan bantuan gaya",
+              "b": "Alat yang memudahkan pergerakan benda berat",
+              "c": "Alat yang mengubah arah atau besar gaya",
+              "d": "Alat yang digunakan untuk mengukur gaya"
             },
-            "correctAnswer": "A"
-          },
-          {
-            "question": "Apa yang dimaksud dengan larutan elektrolit?",
-            "answers": {
-              "A": "Larutan yang tidak dapat menghantarkan listrik",
-              "B": "Larutan yang dapat menghantarkan listrik",
-              "C": "Larutan yang mengandung senyawa ionik",
-              "D": "Larutan yang mengandung gas terlarut"
-            },
-            "correctAnswer": "B"
+            "correctAnswer": "c"
           }
         ]
       }

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import TableWithSearch from "../../components/Table/TableWithSearch";
 import { quizData as initialQuizData } from "../../assets/data/data.json";
 import Preloader from "../../components/Preloader/Preloader";
-import './Admin.css';
+import "./Admin.css";
 
 const Admin_SetQuiz = () => {
   const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState(initialQuizData);
-  const [editingQuiz, setEditingQuiz] = useState(null); // Kuis yang sedang diedit
-  const navigate = useNavigate(); // Hook untuk melakukan navigasi
+  const [editingQuiz, setEditingQuiz] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,12 +17,12 @@ const Admin_SetQuiz = () => {
   }, []);
 
   const handleEdit = (quiz) => {
-    setEditingQuiz(quiz); // Mengatur data kuis untuk diedit
+    setEditingQuiz(quiz);
   };
 
   const handleDelete = (quiz) => {
     if (window.confirm(`Apakah Anda yakin ingin menghapus kuis "${quiz.title}"?`)) {
-      setQuizData(quizData.filter((item) => item.id !== quiz.id));
+      setQuizData(quizData.filter((item) => item.title !== quiz.title));
       alert(`Kuis "${quiz.title}" telah dihapus.`);
     }
   };
@@ -35,7 +33,7 @@ const Admin_SetQuiz = () => {
 
   const handleUpdate = (updatedQuiz) => {
     const updatedData = quizData.map((quiz) =>
-      quiz.id === updatedQuiz.id ? updatedQuiz : quiz
+      quiz.title === updatedQuiz.title ? updatedQuiz : quiz
     );
     setQuizData(updatedData);
   };
@@ -44,17 +42,11 @@ const Admin_SetQuiz = () => {
   const data = quizData.map((quiz, index) => ({
     no: index + 1,
     title: quiz.title,
-    totalQuestions: quiz.totalQuestions,
+    totalQuestions: quiz.questions.length,
     actions: (
       <div>
         <button onClick={() => handleEdit(quiz)}>Edit</button>
         <button className="delete" onClick={() => handleDelete(quiz)}>Hapus</button>
-        <button
-          className="edit-detail"
-          onClick={() => navigate(`/admin/setting_quiz/edit?id=${quiz.id}`)} // Arahkan ke halaman edit detail
-        >
-          Edit Konten
-        </button>
       </div>
     ),
   }));
@@ -63,7 +55,7 @@ const Admin_SetQuiz = () => {
 
   const [formQuiz, setFormQuiz] = useState({
     title: "",
-    totalQuestions: "", 
+    questions: [],
   });
 
   useEffect(() => {
@@ -72,7 +64,7 @@ const Admin_SetQuiz = () => {
     } else {
       setFormQuiz({
         title: "",
-        totalQuestions: "",
+        questions: [],
       });
     }
   }, [editingQuiz]);
@@ -82,9 +74,26 @@ const Admin_SetQuiz = () => {
     setFormQuiz({ ...formQuiz, [name]: value });
   };
 
+  const handleAddQuestion = () => {
+    setFormQuiz({
+      ...formQuiz,
+      questions: [
+        ...formQuiz.questions,
+        { question: "", options: { a: "", b: "", c: "", d: "" }, correctAnswer: "" },
+      ],
+    });
+  };
+
+  const handleQuestionChange = (index, field, value) => {
+    const updatedQuestions = formQuiz.questions.map((q, i) =>
+      i === index ? { ...q, [field]: value } : q
+    );
+    setFormQuiz({ ...formQuiz, questions: updatedQuestions });
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (formQuiz.title && formQuiz.totalQuestions) {
+    if (formQuiz.title && formQuiz.questions.length > 0) {
       if (editingQuiz) {
         handleUpdate(formQuiz);
         alert(`Kuis "${formQuiz.title}" telah diperbarui.`);
@@ -95,10 +104,10 @@ const Admin_SetQuiz = () => {
       setEditingQuiz(null);
       setFormQuiz({
         title: "",
-        totalQuestions: "",
+        questions: [],
       });
     } else {
-      alert("Semua kolom harus diisi!");
+      alert("Judul dan minimal 1 soal harus diisi!");
     }
   };
 
@@ -113,7 +122,27 @@ const Admin_SetQuiz = () => {
 
         <form onSubmit={handleFormSubmit} className="admin-form">
           <input type="text" name="title" value={formQuiz.title} onChange={handleFormChange} placeholder="Judul Kuis" required />
-          <input type="number" name="totalQuestions" value={formQuiz.totalQuestions} onChange={handleFormChange} placeholder="Jumlah Soal" required />
+          {formQuiz.title && ( // Hanya tampilkan tombol Tambah Soal jika judul kuis telah diisi
+            <button type="button" onClick={handleAddQuestion}>
+              Tambah Soal
+            </button>
+          )}
+          {formQuiz.questions.map((question, index) => (
+            <div key={index} className="question-form">
+              <textarea value={question.question} onChange={(e) => handleQuestionChange(index, "question", e.target.value)} placeholder={`Soal ${index + 1}`} required />
+              <div className="options-container">
+                {["a", "b", "c", "d"].map((option) => (
+                  <input key={option} type="text" placeholder={`Opsi ${option.toUpperCase()}`} value={question.options[option]} onChange={(e) => handleQuestionChange(index, "options", {
+                        ...question.options,
+                        [option]: e.target.value,
+                      })
+                    }
+                    required />
+                ))}
+              </div>
+              <input type="text" value={question.correctAnswer} onChange={(e) => handleQuestionChange(index, "correctAnswer", e.target.value)} placeholder="Jawaban Benar (a/b/c/d)" required />
+            </div>
+          ))}
           <button type="submit" className="submit">
             {editingQuiz ? "Perbarui Kuis" : "Tambah Kuis"}
           </button>
