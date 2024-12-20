@@ -68,7 +68,7 @@ function Navbar({ role }) {
     } else if (role === 'student') {
       return { text: "Selamat datang student", imgSrc: "/img/student.png" };
     }
-    return { text: "Edudu", imgSrc: "/img/logo512.png" };
+    return { text: "Edudu", imgSrc: "/img/logo.svg" };
   };
 
   const { text, imgSrc } = getLogoDetails();

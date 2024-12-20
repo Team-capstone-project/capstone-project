@@ -26,12 +26,7 @@
   font-weight: 500;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease-in-out;
   border: 2px solid #ddd;
-}
-
-.faq-question:hover {
-  transform: translateY(-2px);
 }
 
 .faq-icon {
@@ -40,7 +35,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.faq-question:hover .faq-icon {
+.faq-icon.rotated {
   transform: rotate(90deg);
 }
 

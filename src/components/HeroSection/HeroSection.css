@@ -3,42 +3,28 @@
   color: var(--primary-light);
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 20px;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  padding: 0 5rem;
   position: relative;
   overflow: hidden;
   background-size: cover;
-  background-attachment: fixed;
+  gap: 3rem; /* Spacing between content and image */
 }
 
 .hero-content {
   max-width: 800px;
-  opacity: 0;
-  animation: fadeIn 3s ease-out forwards;
   margin-bottom: 7rem;
 }
 
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  transform: translateY(-30px);
-  animation: slideIn 1s ease-out forwards;
 }
 
 .hero p {
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  transform: translateY(-30px);
-  animation: slideIn 1s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-.btn-hero-content {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
 }
 
 .hero-button {
@@ -50,38 +36,46 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .hero-button:hover {
   background-color: var(--secondary-yellow);
-  transform: scale(1.1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.15);
-  opacity: 0.5;
-  pointer-events: none;
+.hero-image {
+  width: 35%;
+  height: auto;
+  margin-left: 1rem; /* Extra spacing for image */
+  animation: fadeIn 1.5s ease-out forwards;
 }
 
-.circle1 { width: 100px; height: 100px; }
-.circle2 { width: 150px; height: 150px; }
-.circle3 { width: 120px; height: 120px; }
-.circle4 { width: 180px; height: 180px; }
-.circle5 { width: 130px; height: 130px; }
-.circle6 { width: 160px; height: 160px; }
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    gap: 2rem; /* Adjust spacing for smaller screens */
   }
-}
 
-@keyframes slideIn {
-  to {
-    transform: translateY(0);
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-button {
+    width: 100%; /* Makes the button stretch full width */
+    margin-bottom: 1rem; /* Adds space between buttons */
+  }
+
+  .hero-image {
+    display: none; /* Hides the image on mobile */
   }
 }

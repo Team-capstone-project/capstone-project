@@ -4,11 +4,13 @@ import { faqEdudu } from '../../assets/data/data.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-function Faq () {
+function Faq() {
   const [openIndex, setOpenIndex] = useState(null);
+  const [rotatedIndex, setRotatedIndex] = useState(null);
 
   const toggleAnswer = (index) => {
     setOpenIndex(openIndex === index ? null : index);
+    setRotatedIndex(rotatedIndex === index ? null : index);
   };
 
   return (
@@ -17,12 +19,10 @@ function Faq () {
         {faqEdudu.map((item, index) => (
           <div key={index} className="faq-item">
             <div className="faq-question" onClick={() => toggleAnswer(index)}>
-              <FontAwesomeIcon icon={faChevronRight} className="faq-icon" />
+              <FontAwesomeIcon icon={faChevronRight} className={`faq-icon ${rotatedIndex === index ? 'rotated' : ''}`} />
               <span>{item.question}</span>
             </div>
-            <div
-              className={`faq-answer ${openIndex === index ? 'open' : ''}`}
-            >
+            <div className={`faq-answer ${openIndex === index ? 'open' : ''}`}>
               <p>{item.answer}</p>
             </div>
           </div>
@@ -30,6 +30,6 @@ function Faq () {
       </div>
     </div>
   );
-};
+}
 
 export default Faq;

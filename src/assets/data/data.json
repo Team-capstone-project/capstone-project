@@ -24,6 +24,18 @@
       {
         "question": "Apa itu Edudu?",
         "answer": "Edudu adalah platform edukatif yang menyediakan materi pembelajaran berkualitas bagi seluruh pelajar di Indonesia"
+      },
+      {
+        "question": "Materi apa saja yang tersedia di Edudu?",
+        "answer": "Edudu menyediakan berbagai materi pembelajaran dari jenjang Sekolah Menengah Pertama hingga Sekolah Menengah Atas"
+      },
+      {
+        "question": "Apakah terdapat latihan soal yang dapat diakses?",
+        "answer": "Ya, Edudu menyediakan latihan soal berupa kuis yang dapat diakses melalui Learning Management System (LMS)"
+      },
+      {
+        "question": "Cara akses LMS Edudu?",
+        "answer": "Siswa dapat mengakses LMS Edudu dengan menekan tombol 'Masuk ke LMS'. Selanjutnya siswa akan di arahkan ke halaman login dan diharuskan memasukkan email dan kata sandi yang terdaftar. Jika belum memiliki akun, siswa dapat membuat akun pada halaman register dengan memasukkan identitas dan kata sandi"
       }
     ],
 
@@ -102,7 +114,7 @@
         "url": "content/view?id=2",
         "subject": "IPA",
         "gradeLevel": "SMP",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+        "content": "<p>Pernahkah kamu mengangkat sesuatu yang sangat berat hingga terasa mustahil dilakukan? Di sinilah peran pesawat sederhana. Yuk, kita pelajari lebih dalam tentang alat yang sering kita gunakan dalam kehidupan sehari-hari ini!</p><h2>Apa itu Pesawat Sederhana?</h2><p>Pesawat sederhana adalah alat yang digunakan untuk mempermudah pekerjaan manusia dengan mengurangi gaya yang diperlukan atau mengubah arah gaya. Pesawat sederhana tidak menggunakan mesin atau teknologi rumit, melainkan prinsip-prinsip fisika dasar. Pesawat sederhana bekerja dengan cara<ol type='1'><li>Mengurangi gaya yang diperlukan untuk melakukan suatu pekerjaan</li><li>Mengubah arah gaya agar pekerjaan menjadi lebih mudah</li></ol></p>"
       },
       {
         "id": 3,
@@ -112,7 +124,7 @@
         "url": "content/view?id=3",
         "subject": "Matematika",
         "gradeLevel": "SMA",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+        "content": "<p>Eksponen dan logaritma adalah dua konsep dasar dalam matematika yang sangat penting dan memiliki berbagai aplikasi dalam kehidupan sehari-hari, mulai dari ilmu pengetahuan hingga ekonomi. Pada artikel ini, kita akan mempelajari apa itu eksponen dan logaritma, serta hubungan antara keduanya.</p><h2>Apa itu Eksponen?</h2><p>Eksponen adalah operasi matematika yang melibatkan angka yang disebut basis dan angka yang menunjukkan seberapa banyak basis tersebut harus dikalikan dengan dirinya sendiri. Secara umum, eksponen dapat ditulis dalam bentuk:</p><p>$a^n$</p><p>Dimana:<br/>a adalah basis<br/>n adalah eksponen atau pangkat</p>"
       },
       {
         "id": 4,
@@ -122,7 +134,7 @@
         "url": "content/view?id=4",
         "subject": "Biologi",
         "gradeLevel": "SMA",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla justo eget sem feugiat, ac mollis lacus dapibus. Phasellus eget."
+        "content": "<p>Sistem klasifikasi makhluk hidup adalah suatu cara untuk mengelompokkan atau mengklasifikasikan makhluk hidup berdasarkan persamaan dan perbedaan yang ada pada berbagai karakteristik mereka. Dengan sistem ini, kita dapat memahami berbagai jenis organisme dengan lebih mudah, serta mengetahui hubungan antar berbagai spesies di bumi. Sistem ini penting dalam dunia biologi untuk mempelajari keanekaragaman hayati dan untuk mempermudah pengidentifikasian makhluk hidup.</p>"
       },
       {
         "id": 5,
@@ -132,7 +144,7 @@
         "url": "content/view?id=5",
         "subject": "Kimia",
         "gradeLevel": "SMA",
-        "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><img src='/img/spldv.png' alt='SPLDV' /><p>More text goes here.</p>"
+        "content": "<p>Stokiometri adalah cabang ilmu kimia yang mempelajari hubungan kuantitatif antara reaktan dan produk dalam suatu reaksi kimia. Konsep ini sangat penting dalam ilmu kimia, karena memungkinkan kita untuk menghitung jumlah bahan yang dibutuhkan atau dihasilkan dalam suatu reaksi, serta untuk merancang reaksi kimia yang efisien. Stokiometri berhubungan erat dengan hukum-hukum dasar kimia, seperti Hukum Kekekalan Massa dan Hukum Perbandingan Tetap.</p>"
       }
     ],
 

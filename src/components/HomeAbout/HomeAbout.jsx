@@ -5,7 +5,7 @@ function HomeAbout () {
     return (
         <div className="home-about">
             <div className="about-content">
-                <img  src="img/logo512.png" alt="Tentang Edudu" className="about-logo" />
+                <img  src="img/logo_rounded.svg" alt="Tentang Edudu" className="about-logo" />
                 <div className="about-text">
                     <h2>KENALI KAMI</h2>
                     <h1>PLATFORM DIGITAL EDUDU</h1>
