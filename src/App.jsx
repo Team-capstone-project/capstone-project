@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Home from './pages/HomePage/HomePage';
 import ContactPage from './pages/ContactPage/ContactPage';
 import AboutPage from './pages/AboutPage/AboutPage';
@@ -21,33 +22,161 @@ import StudentQuiz from './pages/StudentPage/StudentQuiz';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton/TopButton';
+import generateToken from './utils/generateToken';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const [loading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    const storedRole = localStorage.getItem('userRole');
+
+    if (storedToken) {
+      setIsLogin(true);
+      setUserRole(storedRole);
+    }
+    setIsLoading(false);
+  }, []);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  const onLogin = (role) => {
+    setIsLoading(true);
+    setUserRole(role);
+    localStorage.setItem('authToken', 'your-token-here');
+    localStorage.setItem('userRole', role);
+  };
+
+  const onLogout = () => {
+    setIsLogin(false);
+    setUserRole(null);
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+  };
+
+  // PrivateRoute untuk melindungi rute agar tidak bisa mengakses langsung
+  const PrivateRoute = ({ children, requiredRole }) => {
+    if (!isLogin) {
+      return <Navigate to="/login" />;
+    }
+
+    if (requiredRole && (userRole !== requiredRole && userRole !== 'admin')) {
+      return <Navigate to="/not-found" />;
+    }
+  
+    return children;
+  };
+
   return (
-    <div className='app-container'>
+    <div className="app-container">
       <Router>
         <Routes>
-          {/*Rute Utama*/}
+          {/* Rute Utama */}
           <Route path="/" element={<><Navbar /><Home /><TopButton /><Footer /></>} />
           <Route path="/tentang-kami" element={<><Navbar /><AboutPage /><TopButton /><Footer /></>} />
           <Route path="/hubungi-kami" element={<><Navbar /><ContactPage /><TopButton /><Footer /></>} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
           <Route path="*" element={<NotFound />} />
 
-          {/*Rute Admin*/}
-          <Route path="/admin" element={<><Navbar role="admin" /><AdminPage /></>} />
-          <Route path="/admin/setting_student" element={<><Navbar role="admin" /><Admin_SetStudent /></>} />
-          <Route path="/admin/setting_content" element={<><Navbar role="admin" /><Admin_SetContent /></>} />
-          <Route path="/admin/setting_content/edit" element={<><Navbar role="admin" /><AdminEditContent /></>} />
-          <Route path="/admin/setting_quiz" element={<><Navbar role="admin" /><Admin_SetQuiz /></>} />
-          <Route path="/admin/setting_quiz/edit" element={<><Navbar role="admin" /><AdminEditQuiz /></>} />
+          {/* Rute Admin */}
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Navbar role="admin" />
+                <AdminPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/setting_student"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Navbar role="admin" />
+                <Admin_SetStudent />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/setting_content"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Navbar role="admin" />
+                <Admin_SetContent />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/setting_content/edit"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Navbar role="admin" />
+                <AdminEditContent />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/setting_quiz"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Navbar role="admin" />
+                <Admin_SetQuiz />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/setting_quiz/edit"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Navbar role="admin" />
+                <AdminEditQuiz />
+              </PrivateRoute>
+            }
+          />
 
-          {/*Rute Student*/}
-          <Route path="/student" element={<><Navbar role="student" /><StudentPage /></>} />
-          <Route path="/student/content" element={<><Navbar role="student" /><StudentContent /></>} />
-          <Route path="/student/content/view" element={<><Navbar role="student" /><Student_ViewContent /></>} />
-          <Route path="/student/quiz" element={<><Navbar role="student" /><StudentQuiz /></>} />
+          {/* Rute Student */}
+          <Route
+            path="/student"
+            element={
+              <PrivateRoute requiredRole="user">
+                <Navbar role="user" />
+                <StudentPage />
+              </PrivateRoute>
+            }
+          />
+          
+          <Route
+            path="/student/content"
+            element={
+              <PrivateRoute requiredRole="user">
+                <Navbar role="user" />
+                <StudentContent />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/student/content/view"
+            element={
+              <PrivateRoute requiredRole="user">
+                <Navbar role="user" />
+                <Student_ViewContent />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/student/quiz"
+            element={
+              <PrivateRoute requiredRole="user">
+                <Navbar role="user" />
+                <StudentQuiz />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Router>
     </div>
