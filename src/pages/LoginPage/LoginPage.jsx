@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./LoginPage.css";
 import axios from "axios";
@@ -6,6 +6,20 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ onLogin }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    const storedRole = localStorage.getItem('userRole');
+
+    if (storedToken) {
+      // Jika sudah login, arahkan ke halaman berdasarkan role
+      if (storedRole === 'admin') {
+        navigate('/admin');
+      } else if (storedRole === 'user') {
+        navigate('/student');
+      }
+    }
+  }, [navigate])
   
   // Menangani form login
   function handleLogin(e) {
@@ -30,18 +44,18 @@ const LoginPage = ({ onLogin }) => {
         }
       );
   
-      // Menampilkan response dari API
-      console.log("Full API Response:", result.data);
-  
       const { token, role } = result.data;
   
-      if (!token) {
-        throw new Error("Token tidak ditemukan");
+      if (!token || !role) {
+        throw new Error("Token atau Role tidak ditemukan");
       }
       
+  
       // Menyimpan token dan role ke localStorage
       localStorage.setItem('authToken', token);
       localStorage.setItem('userRole', role);
+  
+      // Update state untuk status login
       onLogin(role);
   
       // Navigasi berdasarkan role
@@ -61,6 +75,8 @@ const LoginPage = ({ onLogin }) => {
       }
     }
   }
+  
+  
 
   return (
     <HelmetProvider>

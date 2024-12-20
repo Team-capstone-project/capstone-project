@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 import Home from './pages/HomePage/HomePage';
 import ContactPage from './pages/ContactPage/ContactPage';
@@ -17,17 +17,16 @@ import StudentPage from './pages/StudentPage/StudentPage';
 import StudentContent from './pages/StudentPage/StudentContent';
 import Student_ViewContent from './pages/StudentPage/Student_ViewContent';
 import StudentQuiz from './pages/StudentPage/StudentQuiz';
-import Student_ViewQuiz from './pages/StudentPage/Student_ViewQuiz';
 
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton/TopButton';
-import generateToken from './utils/generateToken';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [loading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedToken = localStorage.getItem('authToken');
@@ -41,14 +40,12 @@ function App() {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <div>Loading...</div>; // Show loading while checking login state
   }
 
   const onLogin = (role) => {
-    setIsLoading(true);
+    setIsLogin(true);
     setUserRole(role);
-    localStorage.setItem('authToken', 'your-token-here');
-    localStorage.setItem('userRole', role);
   };
 
   const onLogout = () => {
@@ -56,6 +53,9 @@ function App() {
     setUserRole(null);
     localStorage.removeItem('authToken');
     localStorage.removeItem('userRole');
+    setIsLogin(false);
+    setUserRole(null);
+    navigate('/');
   };
 
   // PrivateRoute untuk melindungi rute agar tidak bisa mengakses langsung
@@ -70,15 +70,14 @@ function App() {
   
     return children;
   };
-
   return (
     <div className="app-container">
-      <Router>
+        <Navbar isLogin={isLogin} role={userRole} onLogout={onLogout} />
         <Routes>
           {/* Rute Utama */}
-          <Route path="/" element={<><Navbar /><Home /><TopButton /><Footer /></>} />
-          <Route path="/tentang-kami" element={<><Navbar /><AboutPage /><TopButton /><Footer /></>} />
-          <Route path="/hubungi-kami" element={<><Navbar /><ContactPage /><TopButton /><Footer /></>} />
+          <Route path="/" element={<><Home /><TopButton /><Footer /></>} />
+          <Route path="/tentang-kami" element={<><AboutPage /><TopButton /><Footer /></>} />
+          <Route path="/hubungi-kami" element={<><ContactPage /><TopButton /><Footer /></>} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
           <Route path="*" element={<NotFound />} />
@@ -88,7 +87,6 @@ function App() {
             path="/admin"
             element={
               <PrivateRoute requiredRole="admin">
-                <Navbar role="admin" />
                 <AdminPage />
               </PrivateRoute>
             }
@@ -97,7 +95,6 @@ function App() {
             path="/admin/setting_student"
             element={
               <PrivateRoute requiredRole="admin">
-                <Navbar role="admin" />
                 <Admin_SetStudent />
               </PrivateRoute>
             }
@@ -106,7 +103,6 @@ function App() {
             path="/admin/setting_content"
             element={
               <PrivateRoute requiredRole="admin">
-                <Navbar role="admin" />
                 <Admin_SetContent />
               </PrivateRoute>
             }
@@ -115,7 +111,6 @@ function App() {
             path="/admin/setting_content/edit"
             element={
               <PrivateRoute requiredRole="admin">
-                <Navbar role="admin" />
                 <AdminEditContent />
               </PrivateRoute>
             }
@@ -124,7 +119,6 @@ function App() {
             path="/admin/setting_quiz"
             element={
               <PrivateRoute requiredRole="admin">
-                <Navbar role="admin" />
                 <Admin_SetQuiz />
               </PrivateRoute>
             }
@@ -133,8 +127,7 @@ function App() {
             path="/admin/setting_quiz/edit"
             element={
               <PrivateRoute requiredRole="admin">
-                <Navbar role="admin" />
-                <AdminEditQuiz />
+                <Admin_SetQuiz />
               </PrivateRoute>
             }
           />
@@ -144,7 +137,6 @@ function App() {
             path="/student"
             element={
               <PrivateRoute requiredRole="user">
-                <Navbar role="user" />
                 <StudentPage />
               </PrivateRoute>
             }
@@ -154,7 +146,6 @@ function App() {
             path="/student/content"
             element={
               <PrivateRoute requiredRole="user">
-                <Navbar role="user" />
                 <StudentContent />
               </PrivateRoute>
             }
@@ -163,7 +154,6 @@ function App() {
             path="/student/content/view"
             element={
               <PrivateRoute requiredRole="user">
-                <Navbar role="user" />
                 <Student_ViewContent />
               </PrivateRoute>
             }
@@ -172,13 +162,11 @@ function App() {
             path="/student/quiz"
             element={
               <PrivateRoute requiredRole="user">
-                <Navbar role="user" />
                 <StudentQuiz />
               </PrivateRoute>
             }
           />
         </Routes>
-      </Router>
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import './Navbar.css';
+import { useNavigate } from 'react-router-dom';
 
-function Navbar({ role }) {
+function Navbar({ role, onLogout }) {
+  const navigate = useNavigate();
   useEffect(() => {
     const hamburgerBtn = document.getElementById("hamburger-btn");
     const navMenu = document.querySelector(".nav-menu");
@@ -38,16 +40,16 @@ function Navbar({ role }) {
           <li><a href="/admin/setting_student">Siswa</a></li>
           <li><a href="/admin/setting_content">Konten Materi</a></li>
           <li><a href="/admin/setting_quiz">Kuis</a></li>
-          <li><a href="/">Keluar</a></li>
+          <li><a href="/" onClick={onLogout}>Keluar</a></li>
         </ul>
       );
-    } else if (role === 'student') {
+    } else if (role === 'user') {
       return (
         <ul>
           <li><a href="/student">Dashboard</a></li>
           <li><a href="/student/content">Konten Materi</a></li>
           <li><a href="/student/quiz">Kuis</a></li>
-          <li><a href="/">Keluar</a></li>
+          <li><a href="/" onClick={onLogout}>Keluar</a></li>
         </ul>
       );
     }
