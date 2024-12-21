@@ -37,7 +37,8 @@ const AdminEditContent = () => {
 
   const handleSaveChanges = () => {
     console.log("Changes saved:", dataContent);
-    navigate('/admin/setting_content'); // Mengarahkan kembali ke halaman pengaturan
+    alert('Perubahan telah disimpan!');
+    navigate('/admin/setting_content/list'); // Mengarahkan kembali ke halaman pengaturan
   };
 
   if (!currentItem) {
@@ -48,15 +49,8 @@ const AdminEditContent = () => {
     <div className="pages-container">
       <div className="lms-container">
         <h2 className="section-title">Edit Konten Materi: {currentItem.title}</h2>
-        <img src={currentItem.image} alt={currentItem.title} />
-        <p>
-          <strong>Subject:</strong> {currentItem.subject}
-        </p>
-        <p>
-          <strong>Grade Level:</strong> {currentItem.gradeLevel}
-        </p>
         <EditorText content={currentItem.content} onContentChange={handleContentChange} />
-        <button onClick={handleSaveChanges} className="admin-save-button">
+        <button onClick={handleSaveChanges} className="submit-button">
           Simpan
         </button>
       </div>

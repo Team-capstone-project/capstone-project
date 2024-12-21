@@ -11,12 +11,16 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import Admin_SetStudent from './pages/AdminPage/Admin_SetStudent';
 import Admin_SetContent from './pages/AdminPage/Admin_SetContent';
+import Admin_DaftarContent from './pages/AdminPage/Admin_DaftarContent';
 import AdminEditContent from './pages/AdminPage/Admin_EditContent';
 import Admin_SetQuiz from './pages/AdminPage/Admin_SetQuiz';
+import Admin_DaftarQuiz from './pages/AdminPage/Admin_DaftarQuiz';
+import Admin_EditQuiz from './pages/AdminPage/Admin_EditQuiz';
 import StudentPage from './pages/StudentPage/StudentPage';
 import StudentContent from './pages/StudentPage/StudentContent';
 import Student_ViewContent from './pages/StudentPage/Student_ViewContent';
 import StudentQuiz from './pages/StudentPage/StudentQuiz';
+import Student_ViewQuiz from './pages/StudentPage/Student_ViewQuiz';
 
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
@@ -109,6 +113,14 @@ function App() {
             }
           />
           <Route
+            path="/admin/setting_content/list"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Admin_DaftarContent />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/admin/setting_content/edit"
             element={
               <PrivateRoute requiredRole="admin">
@@ -125,10 +137,18 @@ function App() {
             }
           />
           <Route
+            path="/admin/setting_quiz/list"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <Admin_DaftarQuiz />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/admin/setting_quiz/edit"
             element={
               <PrivateRoute requiredRole="admin">
-                <AdminEditContent />
+                <Admin_EditQuiz />
               </PrivateRoute>
             }
           />
@@ -163,6 +183,14 @@ function App() {
             element={
               <PrivateRoute requiredRole="user">
                 <StudentQuiz />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/student/quiz/:title"
+            element={
+              <PrivateRoute requiredRole="user">
+                <Student_ViewQuiz />
               </PrivateRoute>
             }
           />

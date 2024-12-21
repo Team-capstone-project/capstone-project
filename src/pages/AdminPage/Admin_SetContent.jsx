@@ -117,14 +117,14 @@ console.log("Result:", result);
 
   return (
     <div className="pages-container">
-      <div className="admin-set-content">
+      <div className="lms-container">
      {/* Tampilkan Alert jika ada pesan */}
      {alertMessage && <Alert message={alertMessage} buttons={alertButtons} />}
 
 <form onSubmit={handleSubmit} className="tutorial-form">
   <input
     name="title"
-    placeholder="Bilangan Akar Pangkat Dua"
+    placeholder="Judul Materi"
     value={formContent.title}
     onChange={handleChange}
     className="form-input"
@@ -133,7 +133,7 @@ console.log("Result:", result);
 
   <input
     name="tutorialCategory"
-    placeholder="Matematika"
+    placeholder="Mata Pelajaran"
     value={formContent.tutorialCategory}
     onChange={handleChange}
     className="form-input"
@@ -141,7 +141,7 @@ console.log("Result:", result);
   />
   <input
     name="topicName"
-    placeholder="Bilangan Akar & Berpangkat"
+    placeholder="Bab Materi"
     value={formContent.topicName}
     onChange={handleChange}
     className="form-input"
@@ -149,7 +149,7 @@ console.log("Result:", result);
   />
   <input
     name="level"
-    placeholder="Kelas 7"
+    placeholder="Kelas (Contoh: 7)"
     value={formContent.level}
     onChange={handleChange}
     className="form-input"
