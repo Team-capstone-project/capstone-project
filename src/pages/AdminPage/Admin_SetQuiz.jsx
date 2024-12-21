@@ -5,29 +5,46 @@ import "./Admin.css";
 const Admin_SetQuiz = () => {
   const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState({
-    title:'',
-    category:'',
-    level:'',
-    schoolType:'',
+    title: '',
+    category: '',
+    level: '',
+    schoolType: '',
     questions: [
       {
-        question:'',
-        options:{
-          a:'',
-          b:'',
-          c:'',
-          d:'',
+        question: '',
+        options: {
+          a: '',
+          b: '',
+          c: '',
+          d: '',
         },
-        corectAnswer:'',
+        correctAnswer: '',
       }
     ]
   });
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setQuizData({
       ...quizData,
-      [name]: value
+      [name]: value,
     });
+  };
+
+  // Simulasi loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return <Preloader />;
+  }
+
+  // Fungsi untuk menambahkan kuis (belum diimplementasikan)
+  const handleAdd = () => {
+    // Implementasikan logika penambahan kuis
+    console.log(quizData);
   };
 
   return (
@@ -46,8 +63,8 @@ const Admin_SetQuiz = () => {
           <input
             type="text"
             name="title"
-            value={formTitle}
-            onChange={(e) => setFormTitle(e.target.value)}
+            value={quizData.title}
+            onChange={handleInputChange}
             placeholder="Judul Kuis"
             required
           />

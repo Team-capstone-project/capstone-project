@@ -67,9 +67,7 @@ function Navbar({ role, onLogout }) {
   const getLogoDetails = () => {
     if (role === 'admin') {
       return { text: "Selamat datang admin", imgSrc: "/img/admin.png" };
-    } else if (role === 'teacher') {
-      return { text: "Selamat datang teacher", imgSrc: "/img/teacher.png" };
-    } else if (role === 'student') {
+    } else if (role === 'user') {
       return { text: "Selamat datang student", imgSrc: "/img/student.png" };
     }
     return { text: "Edudu", imgSrc: "/img/logo.svg" };
