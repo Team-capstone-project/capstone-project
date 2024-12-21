@@ -87,29 +87,31 @@ const LoginPage = ({ onLogin }) => {
           content="Masuk ke LMS Edudu untuk melanjutkan pembelajaran"
         />
       </Helmet>
-      <div className="login-container">
-        <div className="login-card">
-          <div className="login-image">
-            <img src="img/login.svg" alt="Masuk LMS Edudu" className="image" />
-          </div>
-          <div className="login-form">
-            <h2 className="login-title">Masuk LMS Edudu</h2>
-            <form onSubmit={handleLogin}>
-              <div className="input-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" required />
-              </div>
-              <div className="input-group">
-                <label htmlFor="password">Kata Sandi</label>
-                <input type="password" id="password" required />
-              </div>
-              <button type="submit" className="login-btn">
-                Masuk
-              </button>
-            </form>
-            <p className="signup-link">
-              Tidak memiliki akun? <a href="/signup">Daftar</a>
-            </p>
+      <div className="pages-container">
+        <div className="login-container">
+          <div className="login-card">
+            <div className="login-image">
+              <img src="img/login.svg" alt="Masuk LMS Edudu" className="image" />
+            </div>
+            <div className="login-form">
+              <h2 className="login-title">Masuk LMS Edudu</h2>
+              <form onSubmit={handleLogin}>
+                <div className="input-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" required />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="password">Kata Sandi</label>
+                  <input type="password" id="password" required />
+                </div>
+                <button type="submit" className="login-btn">
+                  Masuk
+                </button>
+              </form>
+              <p className="signup-link">
+                Tidak memiliki akun? <a href="/signup">Daftar</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

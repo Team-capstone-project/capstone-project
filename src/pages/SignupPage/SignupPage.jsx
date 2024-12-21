@@ -60,54 +60,56 @@ const SignupPage = () => {
           content="Daftar ke LMS Edudu untuk pengalaman belajar yang lebih baik"
         />
       </Helmet>
-      <div className="signup-container">
-        <div className="signup-card">
-          <div className="signup-image">
-            <img
-              src="img/signup.svg"
-              alt="Daftar LMS Edudu"
-              className="image"
-            />
-          </div>
-          <div className="signup-form">
-            <h2 className="signup-title">Daftar LMS Edudu</h2>
-            <form action="" onSubmit={handleRegister}>
-              <div className="input-group">
-                <label htmlFor="firstname">Nama Depan</label>
-                <input type="text" id="firstname" name="firstname" required />
-              </div>
-              <div className="input-group">
-                <label htmlFor="lastname">Nama Belakang</label>
-                <input type="text" id="lastname" name="lastname" required />
-              </div>
-              <div className="input-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div className="input-group">
-                <label htmlFor="password">Kata Sandi</label>
-                <input type="password" id="password" name="password" required />
-              </div>
-              <div className="input-group">
-                <label htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
-                <input
-                  type="password"
-                  id="rePassword"
-                  name="rePassword"
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <label htmlFor="profession">Profesi</label>
-                <input type="text" id="profession" name="profession" required />
-              </div>
-              <button type="submit" className="signup-btn">
-                Sign Up
-              </button>
-            </form>
-            <p className="login-link">
-              Sudah memiliki akun? <a href="/login">Masuk ke LMS</a>
-            </p>
+      <div className="pages-container">
+        <div className="signup-container">
+          <div className="signup-card">
+            <div className="signup-image">
+              <img
+                src="img/signup.svg"
+                alt="Daftar LMS Edudu"
+                className="image"
+              />
+            </div>
+            <div className="signup-form">
+              <h2 className="signup-title">Daftar LMS Edudu</h2>
+              <form action="" onSubmit={handleRegister}>
+                <div className="input-group">
+                  <label htmlFor="firstname">Nama Depan</label>
+                  <input type="text" id="firstname" name="firstname" required />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="lastname">Nama Belakang</label>
+                  <input type="text" id="lastname" name="lastname" required />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="password">Kata Sandi</label>
+                  <input type="password" id="password" name="password" required />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
+                  <input
+                    type="password"
+                    id="rePassword"
+                    name="rePassword"
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="profession">Profesi</label>
+                  <input type="text" id="profession" name="profession" required />
+                </div>
+                <button type="submit" className="signup-btn">
+                  Sign Up
+                </button>
+              </form>
+              <p className="login-link">
+                Sudah memiliki akun? <a href="/login">Masuk ke LMS</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
