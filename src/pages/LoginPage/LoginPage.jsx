@@ -34,7 +34,7 @@ const LoginPage = ({ onLogin }) => {
     try {
       // Mengirim data login ke API
       const result = await axios.post(
-        "https://capstone-project-be-production-5d66.up.railway.app/api/user/login",
+        "https://divine-purpose-production.up.railway.app/api/user/login",
         data,
         {
           headers: {
