@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { quizData as initialQuizData } from "../../assets/data/data.json";
 import Preloader from "../../components/Preloader/Preloader";
 import "./Admin.css";
 
 const Admin_SetQuiz = () => {
   const [loading, setLoading] = useState(true);
-  const [quizData, setQuizData] = useState(initialQuizData);
-  const [formTitle, setFormTitle] = useState("");
-
-  // Simulasi loading
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Fungsi untuk menambah kuis baru
-  const handleAdd = () => {
-    if (formTitle.trim()) {
-      setQuizData([...quizData, { title: formTitle, questions: [] }]);
-      alert(`Kuis "${formTitle}" telah ditambahkan.`);
-      setFormTitle("");
-    } else {
-      alert("Judul kuis tidak boleh kosong!");
-    }
+  const [quizData, setQuizData] = useState({
+    title:'',
+    category:'',
+    level:'',
+    schoolType:'',
+    questions: [
+      {
+        question:'',
+        options:{
+          a:'',
+          b:'',
+          c:'',
+          d:'',
+        },
+        corectAnswer:'',
+      }
+    ]
+  });
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setQuizData({
+      ...quizData,
+      [name]: value
+    });
   };
-
-  if (loading) {
-    return <Preloader />;
-  }
 
   return (
     <div className="pages-container">
