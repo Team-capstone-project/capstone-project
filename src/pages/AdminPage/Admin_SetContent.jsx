@@ -54,7 +54,7 @@ const Admin_SetContent = () => {
       console.log("Before API call");
 
 const result = await axios.post(
-  "https://capstone-project-be-production-a056.up.railway.app/api/tutorial",
+  "https://capstone-project-be-production-5d66.up.railway.app/api/user/tutorial",
   formData,
   {
     headers: {

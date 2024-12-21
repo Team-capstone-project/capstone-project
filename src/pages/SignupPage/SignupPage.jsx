@@ -31,7 +31,7 @@ const SignupPage = () => {
   async function authRegister(data) {
     try {
       const result = await axios.post(
-        "https://capstone-project-be-production-a056.up.railway.app/api/user/register",
+        "https://capstone-project-be-production-5d66.up.railway.app/api/user/register",
         data,
         {
           headers: {
