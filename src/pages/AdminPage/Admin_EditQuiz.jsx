@@ -21,7 +21,7 @@ const Admin_EditQuiz = () => {
     };
   
     const handleDelete = (quiz) => {
-      if (window.confirm(`Apakah Anda yakin ingin menghapus kuis "${quiz.title}"?`)) {
+      if (window.confirm(`Apakah Anda yakin ingin menghapus kuis? "${quiz.title}"?`)) {
         setQuizData(quizData.filter((item) => item.title !== quiz.title));
         alert(`Kuis "${quiz.title}" telah dihapus.`);
       }
