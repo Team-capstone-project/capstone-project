@@ -38,8 +38,10 @@ function Navbar({ role, onLogout }) {
         <ul>
           <li><a href="/admin">Dashboard</a></li>
           <li><a href="/admin/setting_student">Siswa</a></li>
-          <li><a href="/admin/setting_content">Konten Materi</a></li>
-          <li><a href="/admin/setting_quiz">Kuis</a></li>
+          <li><a href="/admin/setting_content">Tambah Materi</a></li>
+          <li><a href="/admin/setting_quiz">Tambah Kuis</a></li>
+          <li><a href="/student/content">Konten Materi </a></li>
+          <li><a href="/student/quiz">Kuis</a></li>
           <li><a href="/" onClick={onLogout}>Keluar</a></li>
         </ul>
       );

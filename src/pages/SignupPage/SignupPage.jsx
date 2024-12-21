@@ -31,7 +31,7 @@ const SignupPage = () => {
   async function authRegister(data) {
     try {
       const result = await axios.post(
-        "https://api-lms-green.vercel.app/api/user/register",
+        "https://capstone-project-be-production-a056.up.railway.app/api/user/register",
         data,
         {
           headers: {

@@ -21,6 +21,7 @@ import StudentQuiz from './pages/StudentPage/StudentQuiz';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton/TopButton';
+import Preloader from './components/Preloader/Preloader';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -40,7 +41,7 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading while checking login state
+    return <Preloader/>; // Show loading while checking login state
   }
 
   const onLogin = (role) => {
@@ -127,11 +128,10 @@ function App() {
             path="/admin/setting_quiz/edit"
             element={
               <PrivateRoute requiredRole="admin">
-                <Admin_SetQuiz />
+                <AdminEditContent />
               </PrivateRoute>
             }
           />
-
           {/* Rute Student */}
           <Route
             path="/student"

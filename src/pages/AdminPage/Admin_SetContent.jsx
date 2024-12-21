@@ -1,163 +1,206 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import TableWithSearch from "../../components/Table/TableWithSearch";
-import { dataContent as initialDataContent } from "../../assets/data/data.json";
-import Preloader from "../../components/Preloader/Preloader";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Admin.css";
+import Alert from "../../components/Alert/Alert";
 
 const Admin_SetContent = () => {
-  const [loading, setLoading] = useState(true);
-  const [dataContent, setDataContent] = useState(initialDataContent);
-  const [editingContent, setEditingContent] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleEdit = (content) => {
-    setEditingContent(content);
-    setImagePreview(content.image || "");
-  };
-
-  const handleDelete = (content) => {
-    if (window.confirm(`Apakah Anda yakin ingin menghapus konten ${content.title}?`)) {
-      setDataContent(dataContent.filter((item) => item.id !== content.id));
-      alert(`${content.title} telah dihapus.`);
-    }
-  };
-
-  const handleAdd = (newContent) => {
-    setDataContent([...dataContent, newContent]);
-  };
-
-  const handleUpdate = (updatedContent) => {
-    const updatedData = dataContent.map((content) =>
-      content.id === updatedContent.id ? updatedContent : content
-    );
-    setDataContent(updatedData);
-  };
-
-  const headers = ["No", "Judul", "Mata Pelajaran", "Jenjang", "Aksi"];
-  const data = dataContent.map((content, index) => ({
-    no: index + 1,
-    title: content.title,
-    subject: content.subject,
-    gradeLevel: content.gradeLevel,
-    aksi: (
-      <div>
-        <button onClick={() => handleEdit(content)}>Edit</button>
-        <button className="delete" onClick={() => handleDelete(content)}>Hapus</button>
-        <button
-          className="edit-detail"
-          onClick={() => navigate(`/admin/setting_content/edit?id=${content.id}`)}
-        >
-          Edit Konten
-        </button>
-      </div>
-    ),
-  }));
-
-  const searchableColumns = ["title"];
-
   const [formContent, setFormContent] = useState({
     title: "",
-    subject: "",
-    gradeLevel: "",
-    date: "",
+    tutorialCategory: "",
+    topicName: "",
+    level: "",
+    schoolType: "",
+    content: "",
     image: "",
-    url: "",
+    keywords: "",
   });
 
-  useEffect(() => {
-    if (editingContent) {
-      setFormContent(editingContent);
-      setImagePreview(editingContent.image || "");
-    } else {
-      setFormContent({
-        title: "",
-        subject: "",
-        gradeLevel: "",
-        date: "",
-        image: "",
-        url: "",
-      });
-      setImagePreview("");
-    }
-  }, [editingContent]);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertButtons, setAlertButton] = useState([]);
+  const [imagePreview, setImagePreview] = useState("");
 
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormContent({ ...formContent, [name]: value });
-    if (name === "image") {
-      setImagePreview(value);
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    if (type === "file") {
+      const file = files[0];
+      setFormContent({ ...formContent, image: file });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result); // Set image preview
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFormContent({ ...formContent, [name]: value });
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, subject, gradeLevel, date, image, url } = formContent;
-
-    if (title && subject && gradeLevel && date && image && url) {
-      if (editingContent) {
-        handleUpdate(formContent);
-        alert(`${title} berhasil diperbarui.`);
-      } else {
-        handleAdd(formContent);
-        alert(`${title} berhasil ditambahkan.`);
-      }
-      setEditingContent(null);
-      setFormContent({
-        title: "",
-        subject: "",
-        gradeLevel: "",
-        date: "",
-        image: "",
-        url: "",
+    try {
+      const formData = new FormData();
+      const token = localStorage.getItem("authToken");
+      console.log(token)
+  
+      // Menambahkan form content ke FormData
+      Object.keys(formContent).forEach(key => {
+        formData.append(key, formContent[key]);
       });
-      setImagePreview("");
-    } else {
-      alert("Semua field wajib diisi!");
+  
+      if (!token) {
+        throw new Error("Token tidak ditemukan. Silakan login terlebih dahulu.");
+      }
+  
+      console.log("Before API call");
+
+const result = await axios.post(
+  "https://capstone-project-be-production-a056.up.railway.app/api/tutorial",
+  formData,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true,
+  }
+);
+
+console.log("After API call");
+console.log("Result:", result);
+      
+  
+      // Menampilkan pesan sukses
+      setAlertMessage("Tutorial Created successfully!");
+      setAlertButton([
+        {
+          label: "Close",
+          onClick: () => setAlertMessage(""),
+          style: { backgroundColor: "green", color: "white" },
+        },
+      ]);
+    } catch (error) {
+      if (error.response) {
+        // Menampilkan pesan kesalahan dari server
+        setAlertMessage(error.response.data.message || "Error creating tutorial!");
+        setAlertButton([
+          {
+            label: "Close",
+            onClick: () => setAlertMessage(""),
+            style: { backgroundColor: "red", color: "white" },
+          },
+        ]);
+      } else if (error.request) {
+        // Jika ada masalah dengan permintaan (misalnya koneksi jaringan terputus)
+        setAlertMessage("Terjadi masalah dengan koneksi server. Silakan coba lagi.");
+        setAlertButton([
+          {
+            label: "Close",
+            onClick: () => setAlertMessage(""),
+            style: { backgroundColor: "red", color: "white" },
+          },
+        ]);
+      } else {
+        // Jika kesalahan tidak teridentifikasi
+        console.error("Kesalahan tidak teridentifikasi:", error.message);
+        setAlertMessage("Terjadi masalah saat posting tutorial. Silakan coba lagi.");
+        setAlertButton([
+          {
+            label: "Close",
+            onClick: () => setAlertMessage(""),
+            style: { backgroundColor: "red", color: "white" },
+          },
+        ]);
+      }
     }
   };
-
-  if (loading) {
-    return <Preloader />;
-  }
+  
 
   return (
     <div className="pages-container">
-      <div className="lms-container">
-        <h2 className="section-title">Manajemen Konten</h2>
-        <form onSubmit={handleFormSubmit} className="admin-form">
-          <input type="text" name="title" value={formContent.title} onChange={handleFormChange} placeholder="Judul Konten" required />
-          <input type="text" name="subject" value={formContent.subject} onChange={handleFormChange} placeholder="Mata Pelajaran" required />
-          <input type="text" name="gradeLevel" value={formContent.gradeLevel} onChange={handleFormChange} placeholder="Jenjang" required />
-          <input type="date" name="date" value={formContent.date} onChange={handleFormChange} required />
-          <input type="text" name="image" value={formContent.image} onChange={handleFormChange} placeholder="Nama File Gambar (contoh: gambar.jpg)" required />
-          <input type="text" name="url" value={formContent.url} onChange={handleFormChange} placeholder="URL" required />
-          {imagePreview && (
-            <div className="image-preview">
-              <img src={imagePreview} alt="Pratinjau Gambar" />
-            </div>
-          )}
-          <button type="submit" className="submit">
-            {editingContent ? "Perbarui Konten" : "Tambah Konten"}
-          </button>
-          {editingContent && (
-            <button type="button" onClick={() => setEditingContent(null)} className="cancel">
-              Batalkan Edit
-            </button>
-          )}
-        </form>
-        <TableWithSearch headers={headers} data={data} searchableColumns={searchableColumns} placeholder="Cari berdasarkan judul konten" rowsPerPage={5} />
-      </div>
+      <div className="admin-set-content">
+     {/* Tampilkan Alert jika ada pesan */}
+     {alertMessage && <Alert message={alertMessage} buttons={alertButtons} />}
+
+<form onSubmit={handleSubmit} className="tutorial-form">
+  <input
+    name="title"
+    placeholder="Bilangan Akar Pangkat Dua"
+    value={formContent.title}
+    onChange={handleChange}
+    className="form-input"
+    required
+  />
+
+  <input
+    name="tutorialCategory"
+    placeholder="Matematika"
+    value={formContent.tutorialCategory}
+    onChange={handleChange}
+    className="form-input"
+    required
+  />
+  <input
+    name="topicName"
+    placeholder="Bilangan Akar & Berpangkat"
+    value={formContent.topicName}
+    onChange={handleChange}
+    className="form-input"
+    required
+  />
+  <input
+    name="level"
+    placeholder="Kelas 7"
+    value={formContent.level}
+    onChange={handleChange}
+    className="form-input"
+    required
+  />
+  <input
+    name="schoolType"
+    placeholder="SMA atau SMP"
+    value={formContent.schoolType}
+    onChange={handleChange}
+    className="form-input"
+    required
+  />
+  <textarea
+    name="content"
+    placeholder="Content"
+    value={formContent.content}
+    onChange={handleChange}
+    className="form-textarea"
+    required
+  />
+  
+  {/* Input untuk gambar */}
+  <input
+    type="file"
+    name="image"
+    placeholder="Choose Image"
+    onChange={handleChange}
+    className="form-input-file"
+  />
+  
+  {/* Preview gambar jika ada */}
+  {imagePreview && (
+    <div className="image-preview-container">
+      <img src={imagePreview} alt="Preview" className="image-preview" />
     </div>
-  );
+  )}
+  
+  <input
+    name="keywords"
+    placeholder="kata kunci dipisahkan dengan koma (Matematika, Kelas 7)"
+    value={formContent.keywords}
+    onChange={(e) => setFormContent({ ...formContent, keywords: e.target.value.split(",") })}
+    className="form-input"
+    required
+  />
+  <button type="submit" className="submit-button">Posting Materi</button>
+</form>
+</div>
+</div>
+);
 };
 
 export default Admin_SetContent;

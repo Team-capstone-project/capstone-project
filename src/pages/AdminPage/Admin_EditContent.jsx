@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dataContent as initialDataContent } from "../../assets/data/data.json";
 import EditorText from '../../components/EditorText/EditorText';
-import { BlockMath, InlineMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 
 const AdminEditContent = () => {

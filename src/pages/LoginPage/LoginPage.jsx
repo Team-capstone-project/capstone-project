@@ -34,7 +34,7 @@ const LoginPage = ({ onLogin }) => {
     try {
       // Mengirim data login ke API
       const result = await axios.post(
-        "https://api-lms-green.vercel.app/api/user/login",
+        "https://capstone-project-be-production-a056.up.railway.app/api/user/login",
         data,
         {
           headers: {
