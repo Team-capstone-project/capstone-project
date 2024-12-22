@@ -141,101 +141,103 @@ const Admin_SetQuiz = () => {
 
   return (
     <div className="pages-container">
-      <form onSubmit={handleSubmit} className="quiz-form">
-        <div className="form-group">
-          <label>Judul Quiz</label>
-          <input
-            type="text"
-            name="title"
-            value={quizData.title}
-            onChange={handleInputChange}
-            required
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label>Mata Pelajaran</label>
-          <input
-            type="text"
-            name="category"
-            value={quizData.category}
-            onChange={handleInputChange}
-            required
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label>Kelas</label>
-          <input
-            type="text"
-            name="level"
-            value={quizData.level}
-            onChange={handleInputChange}
-            required
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label>Jenjang</label>
-          <input
-            type="text"
-            name="schoolType"
-            value={quizData.schoolType}
-            onChange={handleInputChange}
-            required
-            className="form-input"
-          />
-        </div>
+      <div className="lms-container">
+        <form onSubmit={handleSubmit} className="quiz-form">
+          <div className="form-group">
+            <label>Judul Kuis</label>
+            <input
+              type="text"
+              name="title"
+              value={quizData.title}
+              onChange={handleInputChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label>Mata Pelajaran</label>
+            <input
+              type="text"
+              name="category"
+              value={quizData.category}
+              onChange={handleInputChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label>Kelas</label>
+            <input
+              type="text"
+              name="level"
+              value={quizData.level}
+              onChange={handleInputChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label>Jenjang</label>
+            <input
+              type="text"
+              name="schoolType"
+              value={quizData.schoolType}
+              onChange={handleInputChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        <h3>Pertanyaan Dan Jawaban</h3>
-        {quizData.questions.map((question, index) => (
-          <div key={index} className="question-container">
-            <div className="form-group">
-              <label>Pertanyaan {index + 1}</label>
-              <input
-                type="text"
-                name="question"
-                value={question.question}
-                onChange={(e) => handleQuestionChange(index, e)}
-                required
-                className="form-input"
-              />
-            </div>
-            {['a', 'b', 'c', 'd'].map(option => (
-              <div key={option} className="form-group">
-                <label>Opsi {option.toUpperCase()}</label>
+          <h3>Pertanyaan dan Jawaban</h3>
+          {quizData.questions.map((question, index) => (
+            <div key={index} className="question-container">
+              <div className="form-group">
+                <label>Pertanyaan {index + 1}</label>
                 <input
                   type="text"
-                  value={question.options[option]}
-                  onChange={(e) => handleOptionChange(index, option, e)}
+                  name="question"
+                  value={question.question}
+                  onChange={(e) => handleQuestionChange(index, e)}
                   required
                   className="form-input"
                 />
               </div>
-            ))}
-            <div className="form-group">
-              <label>Jawaban Benar</label>
-              <select
-                name="correctAnswer"
-                value={question.correctAnswer}
-                onChange={(e) => handleQuestionChange(index, e)}
-                required
-                className="form-select"
-              >
-                <option value="">Pilih</option>
-                <option value="a">A</option>
-                <option value="b">B</option>
-                <option value="c">C</option>
-                <option value="d">D</option>
-              </select>
+              {['a', 'b', 'c', 'd'].map(option => (
+                <div key={option} className="form-group">
+                  <label>Opsi {option.toUpperCase()}</label>
+                  <input
+                    type="text"
+                    value={question.options[option]}
+                    onChange={(e) => handleOptionChange(index, option, e)}
+                    required
+                    className="form-input"
+                  />
+                </div>
+              ))}
+              <div className="form-group">
+                <label>Jawaban Benar</label>
+                <select
+                  name="correctAnswer"
+                  value={question.correctAnswer}
+                  onChange={(e) => handleQuestionChange(index, e)}
+                  required
+                  className="form-select"
+                >
+                  <option value="">Pilih</option>
+                  <option value="a">A</option>
+                  <option value="b">B</option>
+                  <option value="c">C</option>
+                  <option value="d">D</option>
+                </select>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        <button type="button" onClick={addQuestion} className="add-question-btn">Tambah Pertanyaan</button>
-        <button type="button" onClick={removeLastQuestion} className="remove-question-btn">Hapus Pertanyaan Terakhir</button>
-        <button type="submit" className="submit-btn">Buat Quiz</button>
-      </form>
+          <button type="button" onClick={addQuestion} className="add-question-btn">Tambah Pertanyaan</button>
+          <button type="button" onClick={removeLastQuestion} className="remove-question-btn">Hapus Pertanyaan Terakhir</button>
+          <button type="submit" className="submit-btn">Buat Quiz</button>
+        </form>
+      </div>
     </div>
   );
 };

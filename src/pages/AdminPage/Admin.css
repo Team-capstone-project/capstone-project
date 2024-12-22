@@ -220,12 +220,6 @@
 
 
 /* start admin SetQuiz */
-/* .pages-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
-  padding: 2rem;
-}
-
 .quiz-form {
   max-width: 800px;
   margin: 0 auto;
@@ -282,35 +276,36 @@
 
 
 .add-question-btn,
-.submit-btn {
+.submit-btn,
+.remove-question-btn {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .add-question-btn {
-  background-color: #f3f4f6;
-  color: #4b5563;
-  border: 2px solid #e5e7eb;
-  margin-right: 1rem;
+  background-color: var(--primary-green);
 }
 
 .add-question-btn:hover {
-  background-color: #e5e7eb;
-  color: #374151;
+  background-color: var(--secondary-green);
 }
 
 .submit-btn {
-  background-color: #6366f1;
-  color: white;
-  border: none;
+  background-color: var(--primary-blue);
 }
 
 .submit-btn:hover {
-  background-color: #4f46e5;
-  transform: translateY(-1px);
+  background-color: var(--secondary-blue);
+}
+
+.remove-question-btn {
+  background-color: var(--primary-red);
+}
+
+.remove-question-btn:hover {
+  background-color: var(--secondary-red);
 }
 
 .quiz-form h3 {
@@ -343,9 +338,10 @@
   }
   
   .add-question-btn,
-  .submit-btn {
+  .submit-btn,
+  .remove-question-btn {
     width: 100%;
     margin: 0.5rem 0;
   }
-} */
+}
 /* end admin setQuiz */
