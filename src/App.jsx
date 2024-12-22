@@ -171,7 +171,7 @@ function App() {
             }
           />
           <Route
-            path="/student/content/view"
+            path="/student/content/:type/:slug"
             element={
               <PrivateRoute requiredRole="user">
                 <Student_ViewContent />
@@ -187,7 +187,7 @@ function App() {
             }
           />
           <Route
-            path="/student/quiz/:title"
+            path="/student/quiz/:quizId"
             element={
               <PrivateRoute requiredRole="user">
                 <Student_ViewQuiz />

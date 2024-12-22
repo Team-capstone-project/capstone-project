@@ -1,28 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { quizData } from "../../assets/data/data.json";
+import axios from "axios";
+import './Student.css';
 
 const Student_ViewQuiz = () => {
-  const { title } = useParams();
+  const { quizId } = useParams(); // Mengambil parameter quizId dari URL
   const navigate = useNavigate();
 
-  const selectedQuiz = quizData.find((quiz) => quiz.title === title);
-
-  if (!selectedQuiz) {
-    return <h2 className="quiz-not-found">Kuis tidak ditemukan</h2>;
-  }
-
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [answers, setAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [markedQuestions, setMarkedQuestions] = useState({});
   const [score, setScore] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(selectedQuiz.questions.length * 2 * 60);
+  const [timeLeft, setTimeLeft] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Mengambil data kuis berdasarkan ID dari URL
+  useEffect(() => {
+    if (!quizId) {
+      console.error("Quiz ID parameter is missing.");
+      return;
+    }
+
+    const fetchQuizData = async () => {
+      try {
+        const response = await axios.get(
+          `https://divine-purpose-production.up.railway.app/api/quiz/${quizId}` // API endpoint berdasarkan quizId
+        );
+        
+        // Debugging: Cek respons data
+        console.log("Fetched Quiz Data:", response.data);
+
+        // Pastikan respons data berisi kuis
+        if (response.data.status && response.data.data) {
+          setSelectedQuiz(response.data.data);  // Ambil kuis berdasarkan ID
+          setTimeLeft(response.data.data.questions.length * 2 * 60); // 2 menit per soal
+        } else {
+          console.error("No quiz found with the specified ID.");
+        }
+      } catch (error) {
+        console.error("Error fetching quiz data:", error.response || error);
+      }
+    };
+
+    fetchQuizData();
+  }, [quizId]); // Pastikan hanya quizId yang menjadi dependensi
+
+  // Pastikan selectedQuiz sudah ada dan memiliki questions sebelum menampilkan konten
+  if (!selectedQuiz || !selectedQuiz.questions) {
+    return <h2 className="quiz-not-found">Kuis tidak ditemukan atau data kuis tidak valid</h2>;
+  }
+
+  // Fungsi untuk mengubah jawaban
   const handleAnswerChange = (questionIndex, selectedOption) => {
-    setAnswers({ ...answers, [questionIndex]: selectedOption });
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionIndex]: selectedOption,
+    }));
   };
 
+  // Fungsi untuk menandai soal sebagai ragu-ragu
   const handleMarkQuestion = (questionIndex) => {
     setMarkedQuestions((prev) => ({
       ...prev,
@@ -30,13 +67,16 @@ const Student_ViewQuiz = () => {
     }));
   };
 
-  // Fungsi untuk membatalkan jawaban yang telah dipilih
+  // Fungsi untuk membatalkan pilihan jawaban
   const handleCancelAnswer = (questionIndex) => {
-    const updatedAnswers = { ...answers };
-    delete updatedAnswers[questionIndex]; // Menghapus jawaban yang telah dipilih
-    setAnswers(updatedAnswers);
+    setAnswers((prevAnswers) => {
+      const updatedAnswers = { ...prevAnswers };
+      delete updatedAnswers[questionIndex];
+      return updatedAnswers;
+    });
   };
 
+  // Fungsi untuk submit kuis
   const handleSubmit = () => {
     let correctAnswers = 0;
 
@@ -51,27 +91,20 @@ const Student_ViewQuiz = () => {
     setIsSubmitted(true);
   };
 
-  useEffect(() => {
-    if (timeLeft > 0 && !isSubmitted) {
-      const timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
-      return () => clearInterval(timer);
-    } else if (timeLeft === 0 && !isSubmitted) {
-      handleSubmit();
-    }
-  }, [timeLeft, isSubmitted]);
 
+  // Fungsi format waktu
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
+  // Fungsi navigasi soal
   const navigateQuestion = (index) => {
     setCurrentQuestionIndex(index);
   };
 
+  // Fungsi untuk mendapatkan kelas setiap soal
   const getQuestionBoxClass = (index) => {
     if (index === currentQuestionIndex) return "question-box active";
     if (markedQuestions[index]) return "question-box marked";
@@ -79,7 +112,7 @@ const Student_ViewQuiz = () => {
     return "question-box answered";
   };
 
-  // Cek jika seluruh pertanyaan telah dijawab dan tidak ada "ragu-ragu"
+  // Cek apakah semua soal sudah dijawab
   const isAllAnswered = selectedQuiz.questions.every((_, index) => answers[index] !== undefined);
   const isAnyMarked = Object.values(markedQuestions).includes(true);
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InlineMath } from 'react-katex';
-import 'katex/dist/katex.min.css';
 import axios from 'axios';
 
 const StudentContent = () => {
@@ -20,9 +18,8 @@ const StudentContent = () => {
           },
         });
 
-        console.log(response.data); // Periksa apakah data adalah array
         if (response.data.status && Array.isArray(response.data.data)) {
-          setTutorials(response.data.data); // Simpan array tutorial
+          setTutorials(response.data.data);
         } else {
           setError("Materi tidak ditemukan.");
         }
@@ -48,44 +45,41 @@ const StudentContent = () => {
     return <p className="no-content">Materi tidak ditemukan.</p>;
   }
 
-  // Fungsi untuk merender konten dengan LaTeX dan HTML
-  const renderContent = (content) => {
-    const parts = content.split(/(\$.*?\$)/g);
-    return parts.map((part, index) => {
-      if (part.startsWith('$') && part.endsWith('$')) {
-        return <InlineMath key={index}>{part.slice(1, -1)}</InlineMath>;
-      } else {
-        return <span key={index} dangerouslySetInnerHTML={{ __html: part }} />;
-      }
-    });
+  // Fungsi untuk navigasi ke halaman detail berdasarkan type dan slug
+  const handleViewDetail = (tutorialCategorySlug, slug) => {
+    navigate(`/student/content/${tutorialCategorySlug}/${slug}`); // Arahkan ke halaman detail dengan type dan slug
   };
 
   return (
     <div className="pages-container">
       <div className="lms-container">
         <div className="view-content">
-          {tutorials.map((tutorial) => (
-            <div key={tutorial._id} className="tutorial-item">
-              <div className="article-header">
-                <h1 className="article-title">{tutorial.title}</h1>
-                <p className="article-meta">
-                  {tutorial.tutorialCategory} | {tutorial.level}
-                </p>
-              </div>
-              <div className="article-content">
-                <h2>{tutorial.topicName}</h2>
-                <p>{tutorial.content}</p>
-                <img src={`https://divine-purpose-production.up.railway.app/${tutorial.image}`} alt={tutorial.title} />
-                <p>{tutorial.keywords.join(', ')}</p>
-                <div>{renderContent(tutorial.content)}</div>
-              </div>
-              <div className="article-footer">
-                <button className="back-button" onClick={() => navigate('/student/content')}>
-                  Kembali ke Daftar Materi
+          {tutorials.map((tutorial) => {
+            // Menampilkan URL gambar di konsol untuk verifikasi
+            console.log(`https://divine-purpose-production.up.railway.app${tutorial.image}`);
+            
+            return (
+              <div key={tutorial._id} className="tutorial-item">
+                <img
+                  src={`https://divine-purpose-production.up.railway.app${tutorial.image ? tutorial.image : ''}`}
+                  alt={tutorial.title}
+                  className="tutorial-image"
+                />
+                <div className="article-header">
+                  <h1 className="article-title">{tutorial.title}</h1>
+                  <p className="article-meta">
+                    {tutorial.tutorialCategory} | {tutorial.level} | {tutorial.schoolType}
+                  </p>
+                </div>
+                <button
+                  className="view-detail-button"
+                  onClick={() => handleViewDetail(tutorial.tutorialCategorySlug, tutorial.slug)}  // Arahkan ke halaman detail dengan type dan slug
+                >
+                  Lihat Detail
                 </button>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

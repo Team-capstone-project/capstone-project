@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Table from "../../components/Table/Table";
 import Preloader from "../../components/Preloader/Preloader";
 import Alert from "../../components/Alert/Alert";
-import { quizData } from "../../assets/data/data.json";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import './Student.css';
 
 const StudentQuiz = () => {
   const navigate = useNavigate();
@@ -15,18 +16,38 @@ const StudentQuiz = () => {
     visible: false,
   });
   const [loading, setLoading] = useState(true);
+  const [quizData, setQuizData] = useState([]);
+  const [error, setError] = useState(null);
 
-  // Simulasi loading saat pertama kali halaman dimuat
+  // Mengambil data kuis dari API
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
+    const fetchQuizData = async () => {
+      try {
+        const response = await axios.get('https://divine-purpose-production.up.railway.app/api/quiz');
+        console.log(response.data);
+
+        if (response.data.status && Array.isArray(response.data.data)) {
+          setQuizData(response.data.data);
+        } else {
+          setError("Data kuis tidak tersedia atau format tidak valid.");
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching quiz data", error);
+        setError("Gagal memuat data kuis.");
+        setLoading(false);
+      }
+    };
+
+    fetchQuizData();
   }, []);
 
   // Menambahkan kolom "Aksi" dengan tombol Mulai untuk setiap kuis
-  const quizDataWithStartButton = quizData.map((quiz, index) => ({
+  const quizDataWithStartButton = Array.isArray(quizData) ? quizData.map((quiz, index) => ({
     No: index + 1,
     Topik: quiz.title,
-    "Total Pertanyaan": quiz.questions.length,
+    "Total Pertanyaan": quiz.questions ? quiz.questions.length : 0,
     Aksi: (
       <button
         onClick={() =>
@@ -35,7 +56,8 @@ const StudentQuiz = () => {
             buttons: [
               {
                 label: "Ya",
-                onClick: () => navigate(`/student/quiz/${quiz.title}`),
+                // Gunakan quiz._id atau quiz.id untuk mengarahkan ke halaman kuis yang tepat
+                onClick: () => navigate(`/student/quiz/${quiz._id}`), // Gantilah quiz._id dengan quiz.id jika perlu
               },
               {
                 label: "Tidak",
@@ -50,10 +72,16 @@ const StudentQuiz = () => {
         Mulai
       </button>
     ),
-  }));
+  })) : [];
 
+  // Menampilkan loader saat data sedang dimuat
   if (loading) {
     return <Preloader />;
+  }
+
+  // Menampilkan error jika ada masalah saat mengambil data
+  if (error) {
+    return <div>{error}</div>;
   }
 
   return (
@@ -69,7 +97,7 @@ const StudentQuiz = () => {
             <li>Setelah selesai, klik "Submit Jawaban".</li>
             <li>Jawaban tersimpan otomatis jika waktu telah habis.</li>
           </ul>
-          <p>Tombol "Submit Jawaban" hanya bisa di akses jika seluruh pertanyaan telah terjawab dan tidak ada pertanyaan yang ragu-ragu</p>
+          <p>Tombol "Submit Jawaban" hanya bisa diakses jika seluruh pertanyaan telah terjawab dan tidak ada pertanyaan yang ragu-ragu.</p>
         </div>
         <Table headers={quizHeaders} data={quizDataWithStartButton} />
       </div>
