@@ -90,13 +90,13 @@ const StudentQuiz = () => {
         <h2 className="section-title">Daftar Kuis</h2>
         <div className="quiz-instructions">
           <h3>Cara Pengerjaan Kuis:</h3>
-          <ul>
+          <ol type="a">
             <li>Klik tombol "Mulai" pada kuis yang ingin Anda kerjakan.</li>
             <li>Pilih "Ya" untuk memulai kuis atau "Tidak" untuk membatalkan.</li>
             <li>Selesaikan semua pertanyaan yang tersedia dalam waktu yang ditentukan.</li>
             <li>Setelah selesai, klik "Submit Jawaban".</li>
             <li>Jawaban tersimpan otomatis jika waktu telah habis.</li>
-          </ul>
+          </ol>
           <p>Tombol "Submit Jawaban" hanya bisa diakses jika seluruh pertanyaan telah terjawab dan tidak ada pertanyaan yang ragu-ragu.</p>
         </div>
         <Table headers={quizHeaders} data={quizDataWithStartButton} />
