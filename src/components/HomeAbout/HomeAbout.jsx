@@ -5,10 +5,10 @@ function HomeAbout () {
     return (
         <div className="home-about">
             <div className="about-content">
-                <img  src="img/logo_rounded.svg" alt="Tentang Edudu" className="about-logo" />
+                <img  src="img/logo_square.svg" alt="Tentang Edudu" className="about-logo" />
                 <div className="about-text">
-                    <h2>KENALI KAMI</h2>
-                    <h1>PLATFORM DIGITAL EDUDU</h1>
+                    <h2 className="about-text-subtitle">KENALI KAMI</h2>
+                    <h2 className="about-text-title">PLATFORM DIGITAL EDUDU</h2>
                     <p>
                         EDUDU adalah luaran dari program Merdeka Belajar Kampus Merdeka - MSIB Studi Independen Bersertifikat 
                         Batch 7 di Dicoding. Platform digital EDUDU dikembangkan dengan mengusung tema 

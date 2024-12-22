@@ -16,6 +16,7 @@ function ContactPage() {
           <nav className="breadcrumbs">
             <a href="/">Beranda</a> &gt; <span>Hubungi Kami</span>
           </nav>
+          <h2 className="section-title">Hubungi Kami</h2>
           <div className="contact-info-flex">
             <div className="contact-info-item">
               <FontAwesomeIcon icon={faMapMarkerAlt} className="contact-icon" />
@@ -33,7 +34,6 @@ function ContactPage() {
               <p>(021) 123456789</p>
             </div>
           </div>
-          <h2 className="section-title">Hubungi Kami</h2>
           <div className="my-contact-form">
             <div className="form-content">
               <div className="form-image">
