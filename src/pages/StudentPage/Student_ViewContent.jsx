@@ -1,33 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { dataContent } from '../../assets/data/data.json';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import './Student.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 
 const StudentViewContent = () => {
-  const location = useLocation();
+  const { type, slug } = useParams();  // Mengambil parameter type dan slug dari URL
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  // Fungsi untuk mengambil parameter dari query string
-  const getQueryParam = (param) => {
-    const urlParams = new URLSearchParams(location.search);
-    return urlParams.get(param);
-  };
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const postId = getQueryParam('id');
-    if (postId) {
-      const foundPost = dataContent.find((item) => item.id === parseInt(postId, 10));
-      setPost(foundPost || null); // Jika tidak ditemukan, set ke null
+    const fetchPostData = async () => {
+      try {
+        const token = localStorage.getItem("authToken");
+        const response = await axios.get(`https://divine-purpose-production.up.railway.app/api/tutorial/${type}/${slug}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.data.status && response.data.getATutData) {
+          setPost(response.data.getATutData); // Set data tutorial ke state
+        } else {
+          setError("Tutorial tidak ditemukan.");
+        }
+      } catch (err) {
+        setError("Error fetching tutorial!");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (type && slug) {
+      fetchPostData();
+    } else {
+      setError("ID tutorial tidak ditemukan.");
+      setLoading(false);
     }
-    setLoading(false);
-  }, [location.search]);
+  }, [type, slug]);  // Menggunakan type dan slug sebagai dependency untuk efek
 
   if (loading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   if (!post) {
@@ -36,9 +56,7 @@ const StudentViewContent = () => {
 
   // Fungsi untuk merender konten dengan LaTeX dan HTML
   const renderContent = (content) => {
-    // Mengganti ekspresi LaTeX inline dengan komponen InlineMath
     const parts = content.split(/(\$.*?\$)/g);
-    
     return parts.map((part, index) => {
       if (part.startsWith('$') && part.endsWith('$')) {
         return <InlineMath key={index}>{part.slice(1, -1)}</InlineMath>;
@@ -55,12 +73,12 @@ const StudentViewContent = () => {
           <div className="article-header">
             <h1 className="article-title">{post.title}</h1>
             <p className="article-meta">
-              {post.subject} | {post.gradeLevel}
+              {post.tutorialCategory} | {post.level} | {post.schoolType}
             </p>
           </div>
           <div className="article-content">
-            {post.image && <img src={post.image} alt={post.title} />}
-            <p>{post.description}</p>
+            {post.image && <img src={`https://divine-purpose-production.up.railway.app${post.image}`} alt={post.title} />}
+            <p>{post.content}</p>
             <div>{renderContent(post.content)}</div>
           </div>
           <div className="article-footer">
