@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import './Student.css';
 
 const StudentContent = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [tutorials, setTutorials] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // Query pencarian saat ini
+  const [processedQuery, setProcessedQuery] = useState(""); // Query yang digunakan untuk filtering
   const [error, setError] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false); // Animasi tombol pencarian
+  const [isSearching, setIsSearching] = useState(false); // Mode pencarian
 
   useEffect(() => {
     const fetchTutorials = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("https://divine-purpose-production.up.railway.app/api/tutorial", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://divine-purpose-production.up.railway.app/api/tutorial",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.data.status && Array.isArray(response.data.data)) {
           setTutorials(response.data.data);
@@ -33,6 +41,24 @@ const StudentContent = () => {
     fetchTutorials();
   }, []);
 
+  const handleSearch = () => {
+    setSearchLoading(true); // Set tombol menjadi loading
+    setIsSearching(true); // Masuk mode pencarian
+    setTimeout(() => {
+      setSearchLoading(false); // Hilangkan animasi loading
+      setIsSearching(false);
+      setProcessedQuery(searchQuery);
+    }, 3000);
+  };
+
+  const filteredTutorials = tutorials.filter((tutorial) =>
+    tutorial.title.toLowerCase().includes(processedQuery.toLowerCase())
+  );
+
+  const handleViewDetail = (tutorialCategorySlug, slug) => {
+    navigate(`/student/content/${tutorialCategorySlug}/${slug}`);
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -41,25 +67,34 @@ const StudentContent = () => {
     return <p>Error: {error}</p>;
   }
 
-  if (tutorials.length === 0) {
-    return <p className="no-content">Materi tidak ditemukan.</p>;
-  }
-
-  const handleViewDetail = (tutorialCategorySlug, slug) => {
-    navigate(`/student/content/${tutorialCategorySlug}/${slug}`);
-  };
-
   return (
     <div className="pages-container">
       <div className="lms-container">
+        <h2 className="section-title">Materi Pembelajaran</h2>
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Cari materi pembelajaran"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          <button
+            className={`search-button ${searchLoading ? "loading" : ""}`}
+            onClick={handleSearch}
+            disabled={searchLoading}
+          >
+            {searchLoading ? "Mencari..." : "Cari"}
+          </button>
+        </div>
         <div className="view-content">
-          {tutorials.map((tutorial) => {
-            console.log(`https://divine-purpose-production.up.railway.app${tutorial.image}`);
-            
-            return (
+          {isSearching ? (
+            <p>Mencari materi pembelajaran...</p>
+          ) : filteredTutorials.length > 0 ? (
+            filteredTutorials.map((tutorial) => (
               <div key={tutorial._id} className="tutorial-item">
                 <img
-                  src={`https://divine-purpose-production.up.railway.app${tutorial.image ? tutorial.image : ''}`}
+                  src={`https://divine-purpose-production.up.railway.app${tutorial.image ? tutorial.image : ""}`}
                   alt={tutorial.title}
                   className="tutorial-image"
                 />
@@ -76,8 +111,10 @@ const StudentContent = () => {
                   Lihat Detail
                 </button>
               </div>
-            );
-          })}
+            ))
+          ) : (
+            <p className="no-content">Materi pembelajaran tidak tersedia</p>
+          )}
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ const FlipCard = () => {
       quote: 'Kegagalan hanya terjadi bila kita menyerah',
     },
     {
-      image: '/img/logo_rounded.svg',
+      image: '/img/author_3.png',
       name: 'Fikih Aldiansyah',
       position: 'Back-End Developer',
       quote: 'Hidup itu seperti bersepeda. Jika ingin menjaga keseimbanganmu, kamu harus terus bergerak maju',
