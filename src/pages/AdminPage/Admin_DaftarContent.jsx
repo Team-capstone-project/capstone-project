@@ -103,7 +103,7 @@ const Admin_DaftarContent = () => {
   return (
     <div className="pages-container">
       <div className="lms-container">
-        <h2 className="section-title">Daftar Konten</h2>
+        <h2 className="section-title">Daftar Materi Pembelajaran</h2>
         <TableWithSearch
           headers={headers}
           data={data}

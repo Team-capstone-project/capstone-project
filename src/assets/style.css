@@ -141,37 +141,6 @@ body {
   margin: 40px auto;
 }
 
-.student-profile,
-.teacher-profile {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.profile-section, .info-section {
-  width: 45%;
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.quotes-section {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.quotes-section blockquote {
-  font-style: italic;
-  color: #555;
-  margin: 10px auto;
-  padding: 10px;
-  border-left: 4px solid #007BFF;
-  background: #f9f9f9;
-  border-radius: 4px;
-}
-
 .action-section {
   text-align: center;
 }

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Preloader from "../../components/Preloader/Preloader";
 import { quotesData } from "../../assets/data/data.json";
+import "./Student.css"; // Pastikan Anda membuat file CSS ini
 
 const StudentPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [quote, setQuote] = useState('');
+  const [quote, setQuote] = useState("");
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
@@ -60,11 +61,18 @@ const StudentPage = () => {
     <div className="pages-container">
       <div className="lms-container">
         <div className="card-lms">
-          {/* Profil Siswa */}
           <div className="student-profile">
             <div className="profile-section">
+              <div className="profile-image">
+                <img
+                  src={user.user_image}
+                  alt="User Profile"
+                  width="100"
+                  height="100"
+                />
+              </div>
               <p>
-                <b>Nama</b>: {user.username} 
+                <b>Nama</b>: {user.username}
               </p>
               <p>
                 <b>Email</b>: {user.email}
@@ -90,11 +98,6 @@ const StudentPage = () => {
                 })}
               </p>
             </div>
-          </div>
-
-          {/* Gambar Profil */}
-          <div className="profile-image">
-            <img src={user.user_image} alt="User Profile" width="100" height="100" />
           </div>
 
           {/* Quotes Harian */}

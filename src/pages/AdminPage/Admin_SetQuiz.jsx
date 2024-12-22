@@ -142,6 +142,7 @@ const Admin_SetQuiz = () => {
   return (
     <div className="pages-container">
       <div className="lms-container">
+        <h2 className="section-title">Tambah Kuis</h2>
         <form onSubmit={handleSubmit} className="quiz-form">
           <div className="form-group">
             <label>Judul Kuis</label>
@@ -235,7 +236,7 @@ const Admin_SetQuiz = () => {
 
           <button type="button" onClick={addQuestion} className="add-question-btn">Tambah Pertanyaan</button>
           <button type="button" onClick={removeLastQuestion} className="remove-question-btn">Hapus Pertanyaan Terakhir</button>
-          <button type="submit" className="submit-btn">Buat Quiz</button>
+          <button type="submit" className="submit-btn">Buat Kuis</button>
         </form>
       </div>
     </div>

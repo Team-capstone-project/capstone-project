@@ -1,3 +1,65 @@
+.student-profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.profile-section,
+.info-section {
+  flex: 1;
+  min-width: 280px;
+  max-width: 45%;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.profile-section img {
+  display: block;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.quotes-section {
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  background: #eef5ff;
+  border-radius: 12px;
+  border: 1px solid #dce9f7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.quotes-section h2 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  font-family: 'Roboto', sans-serif;
+}
+
+.quotes-section blockquote {
+  font-style: italic;
+  font-size: 1rem;
+  color: #444;
+  margin: 10px auto;
+  padding: 15px 20px;
+  border-left: 5px solid var(--primary-blue);
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  line-height: 1.6;
+}
+
 .view-content {
   display: flex;
   flex-wrap: wrap;
@@ -272,4 +334,12 @@
   background-color: #ccc;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-section,
+  .info-section {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
 }

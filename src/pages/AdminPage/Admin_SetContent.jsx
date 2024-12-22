@@ -121,88 +121,89 @@ const Admin_SetContent = () => {
   return (
     <div className="pages-container">
       <div className="lms-container">
-     {/* Tampilkan Alert jika ada pesan */}
-     {alertMessage && <Alert message={alertMessage} buttons={alertButtons} />}
+        <h2 className="section-title">Tambah Materi Pembelajaran</h2>
+        {/* Tampilkan Alert jika ada pesan */}
+        {alertMessage && <Alert message={alertMessage} buttons={alertButtons} />}
 
-<form onSubmit={handleSubmit} className="tutorial-form">
-  <input
-    name="title"
-    placeholder="Judul Materi"
-    value={formContent.title}
-    onChange={handleChange}
-    className="form-input"
-    required
-  />
+        <form onSubmit={handleSubmit} className="tutorial-form">
+          <input
+            name="title"
+            placeholder="Judul Materi"
+            value={formContent.title}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
 
-  <input
-    name="tutorialCategory"
-    placeholder="Mata Pelajaran"
-    value={formContent.tutorialCategory}
-    onChange={handleChange}
-    className="form-input"
-    required
-  />
-  <input
-    name="topicName"
-    placeholder="Bab Materi"
-    value={formContent.topicName}
-    onChange={handleChange}
-    className="form-input"
-    required
-  />
-  <input
-    name="level"
-    placeholder="Kelas (Contoh: 7)"
-    value={formContent.level}
-    onChange={handleChange}
-    className="form-input"
-    required
-  />
-  <input
-    name="schoolType"
-    placeholder="SMA atau SMP"
-    value={formContent.schoolType}
-    onChange={handleChange}
-    className="form-input"
-    required
-  />
-  <textarea
-    name="content"
-    placeholder="Content"
-    value={formContent.content}
-    onChange={handleChange}
-    className="form-textarea"
-    required
-  />
-  
-  {/* Input untuk gambar */}
-  <input
-    type="file"
-    name="image"
-    placeholder="Choose Image"
-    onChange={handleChange}
-    className="form-input-file"
-  />
-  
-  {/* Preview gambar jika ada */}
-  {imagePreview && (
-    <div className="image-preview-container">
-      <img src={imagePreview} alt="Preview" className="image-preview" />
+          <input
+            name="tutorialCategory"
+            placeholder="Mata Pelajaran"
+            value={formContent.tutorialCategory}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          <input
+            name="topicName"
+            placeholder="Bab Materi"
+            value={formContent.topicName}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          <input
+            name="level"
+            placeholder="Kelas (Contoh: Kelas 7)"
+            value={formContent.level}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          <input
+            name="schoolType"
+            placeholder="SMA atau SMP"
+            value={formContent.schoolType}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          <textarea
+            name="content"
+            placeholder="Isi konten (edit html)"
+            value={formContent.content}
+            onChange={handleChange}
+            className="form-textarea"
+            required
+          />
+          
+          {/* Input untuk gambar */}
+          <input
+            type="file"
+            name="image"
+            placeholder="Choose Image"
+            onChange={handleChange}
+            className="form-input-file"
+          />
+          
+          {/* Preview gambar jika ada */}
+          {imagePreview && (
+            <div className="image-preview-container">
+              <img src={imagePreview} alt="Preview" className="image-preview" />
+            </div>
+          )}
+          
+          <input
+            name="keywords"
+            placeholder="kata kunci dipisahkan dengan koma (Contoh: Matematika, Kelas 7)"
+            value={formContent.keywords}
+            onChange={(e) => setFormContent({ ...formContent, keywords: e.target.value.split(",") })}
+            className="form-input"
+            required
+          />
+          <button type="submit" className="submit-button">Posting Materi</button>
+        </form>
+      </div>
     </div>
-  )}
-  
-  <input
-    name="keywords"
-    placeholder="kata kunci dipisahkan dengan koma (Matematika, Kelas 7)"
-    value={formContent.keywords}
-    onChange={(e) => setFormContent({ ...formContent, keywords: e.target.value.split(",") })}
-    className="form-input"
-    required
-  />
-  <button type="submit" className="submit-button">Posting Materi</button>
-</form>
-</div>
-</div>
 );
 };
 

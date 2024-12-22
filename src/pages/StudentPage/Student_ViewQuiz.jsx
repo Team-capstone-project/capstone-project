@@ -46,6 +46,25 @@ const Student_ViewQuiz = () => {
     fetchQuizData();
   }, [quizId]); // Pastikan hanya quizId yang menjadi dependensi
 
+  useEffect(() => {
+    if (timeLeft <= 0 || isSubmitted) return;
+  
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 0) {
+          clearInterval(timer);
+          // Men-submit kuis ketika waktu habis
+          handleSubmit(); // Submit quiz when time is up
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+  
+    // Membersihkan interval ketika komponen unmount atau waktu habis
+    return () => clearInterval(timer);
+  }, [timeLeft, isSubmitted]); // Gunakan timeLeft dan isSubmitted sebagai dependensi  
+
   // Pastikan selectedQuiz sudah ada dan memiliki questions sebelum menampilkan konten
   if (!selectedQuiz || !selectedQuiz.questions) {
     return <h2 className="quiz-not-found">Kuis tidak ditemukan atau data kuis tidak valid</h2>;
@@ -91,7 +110,6 @@ const Student_ViewQuiz = () => {
     setIsSubmitted(true);
   };
 
-
   // Fungsi format waktu
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -136,7 +154,7 @@ const Student_ViewQuiz = () => {
             </div>
           ) : (
             <>
-              <h2 className="quiz-title">{selectedQuiz.title}</h2>
+              <h2 className="quiz-title">Kuis: {selectedQuiz.title}</h2>
               <div className="quiz-timer">
                 <h4>Waktu Tersisa: {formatTime(timeLeft)}</h4>
               </div>
