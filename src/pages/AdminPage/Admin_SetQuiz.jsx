@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import axios from "axios";
 
 const Admin_SetQuiz = () => {
+  const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState({
     title: '',
     category: '',
@@ -21,14 +22,17 @@ const Admin_SetQuiz = () => {
     const { name, value } = e.target;
     setQuizData({
       ...quizData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleQuestionChange = (index, e) => {
     const { name, value } = e.target;
     const updatedQuestions = [...quizData.questions];
-    updatedQuestions[index] = { ...updatedQuestions[index], [name]: value };
+    updatedQuestions[index] = { 
+      ...updatedQuestions[index], 
+      [name]: value 
+    };
     setQuizData({
       ...quizData,
       questions: updatedQuestions
@@ -58,7 +62,7 @@ const Admin_SetQuiz = () => {
     if (quizData.questions.length > 1) {
       setQuizData({
         ...quizData,
-        questions: quizData.questions.slice(0, quizData.questions.length - 1)
+        questions: quizData.questions.slice(0, -1)
       });
     }
   };
@@ -73,7 +77,16 @@ const Admin_SetQuiz = () => {
     }
 
     for (let i = 0; i < quizData.questions.length; i++) {
-      if (!quizData.questions[i].correctAnswer) {
+      const { question, options, correctAnswer } = quizData.questions[i];
+      if (!question.trim()) {
+        alert(`Pertanyaan ke-${i + 1} tidak boleh kosong.`);
+        return;
+      }
+      if (!options.a.trim() || !options.b.trim() || !options.c.trim() || !options.d.trim()) {
+        alert(`Semua opsi di pertanyaan ke-${i + 1} harus diisi.`);
+        return;
+      }
+      if (!correctAnswer) {
         alert(`Pertanyaan ke-${i + 1} tidak memiliki jawaban yang benar.`);
         return;
       }
@@ -114,6 +127,17 @@ const Admin_SetQuiz = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="pages-container">
@@ -198,7 +222,7 @@ const Admin_SetQuiz = () => {
                 required
                 className="form-select"
               >
-                <option value="">Select</option>
+                <option value="">Pilih</option>
                 <option value="a">A</option>
                 <option value="b">B</option>
                 <option value="c">C</option>
@@ -208,17 +232,9 @@ const Admin_SetQuiz = () => {
           </div>
         ))}
 
-        <button type="button" onClick={addQuestion} className="add-question-btn">Add Question</button>
-        
-        <button
-          type="button"
-          onClick={removeLastQuestion}
-          className="remove-question-btn"
-        >
-          &times;
-        </button>
-        
-        <button type="submit" className="submit-btn">Create Quiz</button>
+        <button type="button" onClick={addQuestion} className="add-question-btn">Tambah Pertanyaan</button>
+        <button type="button" onClick={removeLastQuestion} className="remove-question-btn">Hapus Pertanyaan Terakhir</button>
+        <button type="submit" className="submit-btn">Buat Quiz</button>
       </form>
     </div>
   );
