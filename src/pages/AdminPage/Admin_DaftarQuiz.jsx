@@ -10,7 +10,6 @@ const Admin_DaftarQuiz = () => {
   const [quizData, setQuizData] = useState([]);
   const navigate = useNavigate();
 
-  // Mengambil data kuis dari API
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
@@ -32,24 +31,30 @@ const Admin_DaftarQuiz = () => {
   }, []);
 
   const handleEdit = (quiz) => {
-    navigate(`/admin/setting_quiz/edit?id=${quiz._id}`);  // Menggunakan ID untuk edit
+    navigate(`/admin/setting_quiz/edit?id=${quiz._id}`);
   };
 
-  const handleDelete = (quiz) => {
+  const handleDelete = async (quiz) => {
     if (window.confirm(`Apakah Anda yakin ingin menghapus kuis "${quiz.title}"?`)) {
-      // Menghapus kuis dari server (gunakan API untuk ini)
-      axios
-        .delete(`https://divine-purpose-production.up.railway.app/api/quiz/${quiz._id}`)
-        .then(() => {
-          setQuizData(quizData.filter((item) => item._id !== quiz._id));
-          alert(`Kuis "${quiz.title}" telah dihapus.`);
-        })
-        .catch((error) => {
-          console.error("Error deleting quiz", error);
-          alert("Gagal menghapus kuis.");
-        });
+      try {
+        const token = localStorage.getItem("authToken");
+        await axios.delete(
+          `https://divine-purpose-production.up.railway.app/api/quiz/${quiz._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setQuizData(quizData.filter((item) => item._id !== quiz._id));
+        alert(`Kuis "${quiz.title}" telah dihapus.`);
+      } catch (error) {
+        console.error("Error deleting quiz:", error);
+        alert("Terjadi kesalahan saat menghapus kuis.");
+      }
     }
   };
+  
 
   const headers = ["No", "Judul", "Jumlah Soal", "Aksi"];
   const data = quizData.map((quiz, index) => ({
