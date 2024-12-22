@@ -2,7 +2,7 @@
   "name": "capstone-project-fe",
   "private": true,
   "version": "0.0.0",
-  "proxy": "https://api-lms-green.vercel.app",
+  "proxy": "https://capstone-project-be-production-f798.up.railway.app",
   "type": "module",
   "scripts": {
     "dev": "vite",

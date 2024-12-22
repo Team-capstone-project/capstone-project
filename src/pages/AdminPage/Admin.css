@@ -217,3 +217,135 @@
 .pagination .page-button {
   max-width: calc(100% / 10); /* Maksimal 10 tombol dalam satu baris */
 }
+
+
+/* start admin SetQuiz */
+/* .pages-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  padding: 2rem;
+}
+
+.quiz-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f9fafb;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background-color: white;
+}
+
+.question-container {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e2e8f0;
+}
+
+.question-container h4 {
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+
+.add-question-btn,
+.submit-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.add-question-btn {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 2px solid #e5e7eb;
+  margin-right: 1rem;
+}
+
+.add-question-btn:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.submit-btn {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+}
+
+.submit-btn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.quiz-form h3 {
+  color: #1f2937;
+  font-size: 1.5rem;
+  margin: 2rem 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .pages-container {
+    padding: 1rem;
+  }
+  
+  .quiz-form {
+    padding: 1.5rem;
+  }
+  
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .add-question-btn,
+  .submit-btn {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+} */
+/* end admin setQuiz */

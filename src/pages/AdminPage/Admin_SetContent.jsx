@@ -40,34 +40,27 @@ const Admin_SetContent = () => {
     try {
       const formData = new FormData();
       const token = localStorage.getItem("authToken");
-      console.log(token)
-  
+    
       // Menambahkan form content ke FormData
       Object.keys(formContent).forEach(key => {
         formData.append(key, formContent[key]);
       });
-  
+    
       if (!token) {
         throw new Error("Token tidak ditemukan. Silakan login terlebih dahulu.");
       }
   
-      console.log("Before API call");
-
-const result = await axios.post(
-  "https://divine-purpose-production.up.railway.app/api/user/tutorial",
-  formData,
-  {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    },
-    withCredentials: true,
-  }
-);
-
-console.log("After API call");
-console.log("Result:", result);
-      
+      const result = await axios.post(
+        "https://divine-purpose-production.up.railway.app/api/tutorial",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
   
       // Menampilkan pesan sukses
       setAlertMessage("Tutorial Created successfully!");
@@ -78,9 +71,21 @@ console.log("Result:", result);
           style: { backgroundColor: "green", color: "white" },
         },
       ]);
+  
+      // Kosongkan form
+      setFormContent({
+        title: "",
+        tutorialCategory: "",
+        topicName: "",
+        level: "",
+        schoolType: "",
+        content: "",
+        image: "",
+        keywords: "",
+      });
+      setImagePreview(""); // Menghapus preview gambar
     } catch (error) {
       if (error.response) {
-        // Menampilkan pesan kesalahan dari server
         setAlertMessage(error.response.data.message || "Error creating tutorial!");
         setAlertButton([
           {
@@ -90,7 +95,6 @@ console.log("Result:", result);
           },
         ]);
       } else if (error.request) {
-        // Jika ada masalah dengan permintaan (misalnya koneksi jaringan terputus)
         setAlertMessage("Terjadi masalah dengan koneksi server. Silakan coba lagi.");
         setAlertButton([
           {
@@ -100,7 +104,6 @@ console.log("Result:", result);
           },
         ]);
       } else {
-        // Jika kesalahan tidak teridentifikasi
         console.error("Kesalahan tidak teridentifikasi:", error.message);
         setAlertMessage("Terjadi masalah saat posting tutorial. Silakan coba lagi.");
         setAlertButton([
