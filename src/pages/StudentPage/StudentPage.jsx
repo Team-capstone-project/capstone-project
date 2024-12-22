@@ -1,12 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import Preloader from '../../components/Preloader/Preloader';
-import { quotesData, dataSiswa } from '../../assets/data/data.json';
+import React, { useState, useEffect } from "react";
+import Preloader from "../../components/Preloader/Preloader";
+import { quotesData } from "../../assets/data/data.json";
 
 const StudentPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [quote, setQuote] = useState('');
-  const [siswa, setSiswa] = useState(null);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+
+  const token = localStorage.getItem("authToken");
+  const storedUser = localStorage.getItem("userData");
+
+  useEffect(() => {
+    console.log("Stored token:", token);
+    console.log("Stored user data:", storedUser);
+
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error("Error parsing stored user data:", error);
+        setError("Terjadi masalah saat membaca data pengguna.");
+      }
+    } else {
+      setError("Data pengguna tidak ditemukan.");
+    }
+  }, [storedUser]);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
@@ -24,17 +44,16 @@ const StudentPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const siswaData = dataSiswa.find((s) => s.id === 4);
-    setSiswa(siswaData);
-  }, []);
-
   if (loading) {
     return <Preloader />;
   }
 
-  if (!siswa) {
-    return <p>Data siswa tidak ditemukan.</p>;
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!user) {
+    return <p>Data pengguna tidak ditemukan.</p>;
   }
 
   return (
@@ -45,24 +64,37 @@ const StudentPage = () => {
           <div className="student-profile">
             <div className="profile-section">
               <p>
-                <b>Nama</b>: {siswa.nama}
+                <b>Nama</b>: {user.username} 
               </p>
               <p>
-                <b>Email</b>: {siswa.email}
+                <b>Email</b>: {user.email}
               </p>
               <p>
-                <b>Sekolah</b>: {siswa.sekolah}
+                <b>Profesi</b>: {user.profession}
               </p>
             </div>
             <div className="info-section">
               <p>
-                {currentDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-                })}{' '}
-                -{' '}
-                {currentDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta',
+                {currentDate.toLocaleDateString("id-ID", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}{" "}
+                -{" "}
+                {currentDate.toLocaleTimeString("id-ID", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  timeZone: "Asia/Jakarta",
                 })}
               </p>
             </div>
+          </div>
+
+          {/* Gambar Profil */}
+          <div className="profile-image">
+            <img src={user.user_image} alt="User Profile" width="100" height="100" />
           </div>
 
           {/* Quotes Harian */}

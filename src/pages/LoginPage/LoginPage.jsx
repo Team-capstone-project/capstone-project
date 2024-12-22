@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./LoginPage.css";
 import axios from "axios";
@@ -8,20 +8,21 @@ const LoginPage = ({ onLogin }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    const storedRole = localStorage.getItem('userRole');
+    const storedToken = localStorage.getItem("authToken");
+    const storedRole = localStorage.getItem("userRole");
+
+    console.log("Stored token:", storedToken);
+    console.log("Stored role:", storedRole);
 
     if (storedToken) {
-      // Jika sudah login, arahkan ke halaman berdasarkan role
-      if (storedRole === 'admin') {
-        navigate('/admin');
-      } else if (storedRole === 'user') {
-        navigate('/student');
+      if (storedRole === "admin") {
+        navigate("/admin");
+      } else if (storedRole === "user") {
+        navigate("/student");
       }
     }
-  }, [navigate])
-  
-  // Menangani form login
+  }, [navigate]);
+
   function handleLogin(e) {
     e.preventDefault();
     let email = e.target.email.value;
@@ -32,7 +33,6 @@ const LoginPage = ({ onLogin }) => {
 
   async function authLogin(data) {
     try {
-      // Mengirim data login ke API
       const result = await axios.post(
         "https://divine-purpose-production.up.railway.app/api/user/login",
         data,
@@ -43,22 +43,33 @@ const LoginPage = ({ onLogin }) => {
           withCredentials: true,
         }
       );
-  
-      const { token, role } = result.data;
-  
-      if (!token || !role) {
-        throw new Error("Token atau Role tidak ditemukan");
+
+      console.log("API Response:", result.data);
+
+      const { token, role, username, user_image, email, profession } = result.data;
+
+      if (!token || !role || !username || !user_image || !email || !profession) {
+        throw new Error("Token, Role, User, User Image, Email atau Profession tidak ditemukan");
       }
-      
-  
-      // Menyimpan token dan role ke localStorage
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('userRole', role);
-  
-      // Update state untuk status login
+
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("userRole", role);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          username,
+          user_image,
+          role,
+          profession,
+          email,
+        })
+      );
+      console.log("Token disimpan:", localStorage.getItem("authToken"));
+      console.log("Role disimpan:", localStorage.getItem("userRole"));
+      console.log("User disimpan:", localStorage.getItem("userData"));
+
       onLogin(role);
-  
-      // Navigasi berdasarkan role
+
       if (role === "admin") {
         navigate("/admin");
       } else if (role === "user") {
@@ -75,8 +86,6 @@ const LoginPage = ({ onLogin }) => {
       }
     }
   }
-  
-  
 
   return (
     <HelmetProvider>
@@ -91,7 +100,11 @@ const LoginPage = ({ onLogin }) => {
         <div className="login-container">
           <div className="login-card">
             <div className="login-image">
-              <img src="img/login.svg" alt="Masuk LMS Edudu" className="image" />
+              <img
+                src="img/login.svg"
+                alt="Masuk LMS Edudu"
+                className="image"
+              />
             </div>
             <div className="login-form">
               <h2 className="login-title">Masuk LMS Edudu</h2>
