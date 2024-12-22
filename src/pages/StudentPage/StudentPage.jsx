@@ -8,28 +8,24 @@ const StudentPage = () => {
   const [quote, setQuote] = useState('');
   const [siswa, setSiswa] = useState(null);
 
-  // Simulasi loading saat halaman pertama kali dimuat
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Mengambil quote berdasarkan hari saat ini
   useEffect(() => {
-    const today = new Date().getDate(); // Mendapatkan tanggal hari ini
-    const quoteIndex = today % quotesData.length; // Perputaran index quote
+    const today = new Date().getDate();
+    const quoteIndex = today % quotesData.length;
     setQuote(quotesData[quoteIndex].text);
   }, []);
 
-  // Mengupdate waktu setiap detik
   useEffect(() => {
     const interval = setInterval(() => setCurrentDate(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Menentukan data siswa dengan id tertentu
   useEffect(() => {
-    const siswaData = dataSiswa.find((s) => s.id === 4); // id = 4
+    const siswaData = dataSiswa.find((s) => s.id === 4);
     setSiswa(siswaData);
   }, []);
 

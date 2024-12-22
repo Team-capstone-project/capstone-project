@@ -1,136 +1,240 @@
 import React, { useState, useEffect } from "react";
 import TableWithSearch from "../../components/Table/TableWithSearch";
-import { dataSiswa as initialDataSiswa } from "../../assets/data/data.json";
+import axios from "axios";
 import Preloader from "../../components/Preloader/Preloader";
 import "./Admin.css";
 
-const Admin_SetStudent = () => {
+const Admin_SetUser = () => {
   const [loading, setLoading] = useState(true);
-  const [dataSiswa, setDataSiswa] = useState(initialDataSiswa);
-  const [editingSiswa, setEditingSiswa] = useState(null);
-  const [formSiswa, setFormSiswa] = useState({
-    nama: "",
-    sekolah: "",
+  const [dataSiswa, setDataSiswa] = useState([]);
+  const [editingUser, setEditingUser] = useState(null);
+  const [formUser, setFormUser] = useState({
+    firstname: "",
+    lastname: "",
+    profession: "",
     email: "",
     password: "",
   });
 
-  // Simulasi loading saat halaman pertama kali diakses
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("authToken");
+  
+        if (!token) {
+          throw new Error("Token tidak ditemukan. Silakan login ulang.");
+        }
+  
+        const response = await axios.get(
+          "https://divine-purpose-production.up.railway.app/api/user/all-users",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
+  
+        console.log(response.data);
+  
+        const apiData = response.data.allUser || [];
+  
+        const formattedData = apiData.map((user) => ({
+          firstname: user.firstname,
+          lastname: user.lastname,
+          profession: user.profession || "Tidak diketahui",
+          email: user.email,
+        }));
+  
+        setDataSiswa(formattedData);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+        alert(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
   }, []);
 
-  // Update form ketika mode edit diaktifkan
-  useEffect(() => {
-    if (editingSiswa) {
-      setFormSiswa(editingSiswa);
-    } else {
-      setFormSiswa({ nama: "", sekolah: "", email: "", password: "" });
-    }
-  }, [editingSiswa]);
-
-  // Fungsi untuk mengedit data siswa
-  const handleEdit = (siswa) => {
-    setEditingSiswa(siswa);
+  const handleAdd = (newUser) => {
+    setDataSiswa([...dataSiswa, newUser]);
   };
 
-  // Fungsi untuk menghapus data siswa
-  const handleDelete = (siswa) => {
-    if (window.confirm(`Apakah Anda yakin ingin menghapus ${siswa.nama}?`)) {
-      setDataSiswa(dataSiswa.filter((item) => item.email !== siswa.email));
-      alert(`${siswa.nama} telah dihapus.`);
-    }
-  };
 
-  // Fungsi untuk menambahkan siswa baru
-  const handleAdd = (newSiswa) => {
-    setDataSiswa([...dataSiswa, newSiswa]);
-  };
-
-  // Fungsi untuk memperbarui data siswa
-  const handleUpdate = (updatedSiswa) => {
-    const updatedData = dataSiswa.map((siswa) =>
-      siswa.email === updatedSiswa.email ? updatedSiswa : siswa
+  const handleUpdate = (updatedUser) => {
+    const updatedData = dataSiswa.map((user) =>
+      user.email === updatedUser.email ? updatedUser : user
     );
     setDataSiswa(updatedData);
   };
 
-  // Fungsi untuk menangani perubahan di form
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormSiswa((prev) => ({ ...prev, [name]: value }));
+
+  const handleDelete = (user) => {
+    if (window.confirm(`Apakah Anda yakin ingin menghapus ${user.firstname}?`)) {
+      setDataSiswa(dataSiswa.filter((item) => item.email !== user.email));
+      alert(`${user.firstname} telah dihapus.`);
+    }
   };
 
-  // Fungsi untuk menangani submit form
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { nama, sekolah, email, password } = formSiswa;
 
-    if (nama && sekolah && email && password) {
-      if (editingSiswa) {
-        handleUpdate(formSiswa);
-        alert(`${nama} berhasil diperbarui.`);
-      } else {
-        handleAdd(formSiswa);
-        alert(`${nama} berhasil ditambahkan.`);
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const { firstname, lastname, profession, email, password } = formUser;
+
+    if (firstname && lastname && profession && email && password) {
+      try {
+        const token = localStorage.getItem("authToken");
+
+        if (!token) {
+          throw new Error("Token tidak ditemukan. Silakan login ulang.");
+        }
+
+        let response;
+        if (editingUser) {
+          response = await axios.put(
+            `https://divine-purpose-production.up.railway.app/api/user/update/${editingUser.email}`,
+            { firstname, lastname, profession, email, password },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              withCredentials: true,
+            }
+          );
+          handleUpdate(response.data.user);
+        } else {
+          response = await axios.post(
+            "https://divine-purpose-production.up.railway.app/api/user/register",
+            { firstname, lastname, profession, email, password },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              withCredentials: true,
+            }
+          );
+          handleAdd({ firstname, lastname, profession, email });
+        }
+
+        console.log("Operasi berhasil:", response.data);
+        alert(`${firstname} ${editingUser ? "diperbarui" : "berhasil ditambahkan"}.`);
+      } catch (error) {
+        console.error("Error registrasi/operasi:", error.message);
+        alert("Gagal menyelesaikan operasi.");
       }
-      setEditingSiswa(null);
-      setFormSiswa({ nama: "", sekolah: "", email: "", password: "" });
+
+      setEditingUser(null);
+      setFormUser({ firstname: "", lastname: "", profession: "", email: "", password: "" });
     } else {
       alert("Semua kolom wajib diisi!");
     }
   };
 
-  // Header dan data untuk tabel
-  const headers = ["No", "Nama", "Sekolah", "Email", "Aksi"];
-  const data = dataSiswa.map((siswa, index) => ({
+  if (loading) {
+    return <Preloader />;
+  }
+
+  const headers = ["No", "Nama Depan", "Nama Belakang", "Profesi", "Email", "Aksi"];
+  const data = dataSiswa.map((user, index) => ({
     no: index + 1,
-    nama: siswa.nama,
-    sekolah: siswa.sekolah,
-    email: siswa.email,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    profession: user.profession,
+    email: user.email,
     aksi: (
       <div>
-        <button onClick={() => handleEdit(siswa)}>Edit</button>
-        <button className="delete" onClick={() => handleDelete(siswa)}>
+        <button onClick={() => setEditingUser(user)}>Edit</button>
+        <button className="delete" onClick={() => handleDelete(user)}>
           Hapus
         </button>
       </div>
     ),
   }));
 
-  const searchableColumns = ["nama"];
-
-  if (loading) {
-    return <Preloader />;
-  }
+  const searchableColumns = ["firstname", "lastname"];
 
   return (
     <div className="pages-container">
       <div className="lms-container">
-        <h2 className="section-title">Manajemen Siswa</h2>
+        <h2 className="section-title">Manajemen Pengguna</h2>
 
-        {/* Form Tambah/Edit Siswa */}
+        {/* Form Tambah/Edit Pengguna */}
         <form onSubmit={handleFormSubmit} className="admin-form">
-          <input type="text" name="nama" value={formSiswa.nama} onChange={handleFormChange} placeholder="Nama Siswa" required />
-          <input type="text" name="sekolah" value={formSiswa.sekolah} onChange={handleFormChange} placeholder="Sekolah" required />
-          <input type="email" name="email" value={formSiswa.email} onChange={handleFormChange} placeholder="Email Siswa" required disabled={!!editingSiswa} />
-          <input type="password" name="password" value={formSiswa.password} onChange={handleFormChange} placeholder="Kata Sandi" required />
+          <input
+            type="text"
+            name="firstname"
+            value={formUser.firstname}
+            onChange={handleFormChange}
+            placeholder="Nama Depan"
+            required
+          />
+          <input
+            type="text"
+            name="lastname"
+            value={formUser.lastname}
+            onChange={handleFormChange}
+            placeholder="Nama Belakang"
+            required
+          />
+          <input
+            type="text"
+            name="profession"
+            value={formUser.profession}
+            onChange={handleFormChange}
+            placeholder="Profesi"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={formUser.email}
+            onChange={handleFormChange}
+            placeholder="Email"
+            required
+            disabled={!!editingUser}
+          />
+          <input
+            type="password"
+            name="password"
+            value={formUser.password}
+            onChange={handleFormChange}
+            placeholder="Kata Sandi"
+            required
+          />
           <button type="submit" className="submit">
-            {editingSiswa ? "Perbarui Siswa" : "Tambah Siswa"}
+            {editingUser ? "Perbarui Pengguna" : "Tambah Pengguna"}
           </button>
-          {editingSiswa && (
-            <button type="button" onClick={() => setEditingSiswa(null)} className="cancel">
+          {editingUser && (
+            <button
+              type="button"
+              onClick={() => setEditingUser(null)}
+              className="cancel"
+            >
               Batalkan Edit
             </button>
           )}
         </form>
 
         {/* Tabel dengan fitur pencarian */}
-        <TableWithSearch headers={headers} data={data} searchableColumns={searchableColumns} placeholder="Cari berdasarkan nama siswa" rowsPerPage={5} />
+        <TableWithSearch
+          headers={headers}
+          data={data}
+          searchableColumns={searchableColumns}
+          placeholder="Cari berdasarkan nama"
+          rowsPerPage={5}
+        />
       </div>
     </div>
   );
 };
 
-export default Admin_SetStudent;
+export default Admin_SetUser;

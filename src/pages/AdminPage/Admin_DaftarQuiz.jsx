@@ -1,30 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TableWithSearch from "../../components/Table/TableWithSearch";
-import { quizData as initialQuizData } from "../../assets/data/data.json";
 import Preloader from "../../components/Preloader/Preloader";
+import axios from "axios";
 import "./Admin.css";
 
 const Admin_DaftarQuiz = () => {
   const [loading, setLoading] = useState(true);
-  const [quizData, setQuizData] = useState(initialQuizData);
+  const [quizData, setQuizData] = useState([]);
   const navigate = useNavigate();
 
+  // Mengambil data kuis dari API
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
+    const fetchQuizData = async () => {
+      try {
+        const response = await axios.get('https://divine-purpose-production.up.railway.app/api/quiz');
+        if (response.data.status && Array.isArray(response.data.data)) {
+          setQuizData(response.data.data);
+        } else {
+          alert("Data kuis tidak tersedia atau format tidak valid.");
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching quiz data", error);
+        setLoading(false);
+        alert("Gagal memuat data kuis.");
+      }
+    };
+
+    fetchQuizData();
   }, []);
 
   const handleEdit = (quiz) => {
-    navigate(`/admin/setting_quiz/edit?title=${quiz.title}`);
+    navigate(`/admin/setting_quiz/edit?id=${quiz._id}`);  // Menggunakan ID untuk edit
   };
 
   const handleDelete = (quiz) => {
     if (window.confirm(`Apakah Anda yakin ingin menghapus kuis "${quiz.title}"?`)) {
-      setQuizData(quizData.filter((item) => item.title !== quiz.title));
-      alert(`Kuis "${quiz.title}" telah dihapus.`);
+      // Menghapus kuis dari server (gunakan API untuk ini)
+      axios
+        .delete(`https://divine-purpose-production.up.railway.app/api/quiz/${quiz._id}`)
+        .then(() => {
+          setQuizData(quizData.filter((item) => item._id !== quiz._id));
+          alert(`Kuis "${quiz.title}" telah dihapus.`);
+        })
+        .catch((error) => {
+          console.error("Error deleting quiz", error);
+          alert("Gagal menghapus kuis.");
+        });
     }
   };
 

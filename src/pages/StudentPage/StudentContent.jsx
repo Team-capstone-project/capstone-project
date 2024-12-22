@@ -45,9 +45,8 @@ const StudentContent = () => {
     return <p className="no-content">Materi tidak ditemukan.</p>;
   }
 
-  // Fungsi untuk navigasi ke halaman detail berdasarkan type dan slug
   const handleViewDetail = (tutorialCategorySlug, slug) => {
-    navigate(`/student/content/${tutorialCategorySlug}/${slug}`); // Arahkan ke halaman detail dengan type dan slug
+    navigate(`/student/content/${tutorialCategorySlug}/${slug}`);
   };
 
   return (
@@ -55,7 +54,6 @@ const StudentContent = () => {
       <div className="lms-container">
         <div className="view-content">
           {tutorials.map((tutorial) => {
-            // Menampilkan URL gambar di konsol untuk verifikasi
             console.log(`https://divine-purpose-production.up.railway.app${tutorial.image}`);
             
             return (
@@ -73,7 +71,7 @@ const StudentContent = () => {
                 </div>
                 <button
                   className="view-detail-button"
-                  onClick={() => handleViewDetail(tutorial.tutorialCategorySlug, tutorial.slug)}  // Arahkan ke halaman detail dengan type dan slug
+                  onClick={() => handleViewDetail(tutorial.tutorialCategorySlug, tutorial.slug)}
                 >
                   Lihat Detail
                 </button>

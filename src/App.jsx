@@ -121,7 +121,7 @@ function App() {
             }
           />
           <Route
-            path="/admin/setting_content/edit"
+            path="/admin/setting_content/edit/:type/:slug"
             element={
               <PrivateRoute requiredRole="admin">
                 <AdminEditContent />
