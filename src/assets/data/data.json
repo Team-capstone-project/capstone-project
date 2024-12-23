@@ -53,7 +53,7 @@
         "title": "Sistem Persamaan Linear Dua Variabel",
         "date": "2024-12-01",
         "image": "/img/spldv.png",
-        "url": "student/content/view?id=1",
+        "url": "student/content/matematika/sistem-persamaan-linear-dua-variabel",
         "subject": "Matematika",
         "gradeLevel": "SMP"
       },
@@ -62,7 +62,7 @@
         "title": "Pesawat Sederhana",
         "date": "2024-12-02",
         "image": "/img/katrol.png",
-        "url": "student/content/view?id=2",
+        "url": "student/content/ipa/pesawat-sederhana",
         "subject": "IPA",
         "gradeLevel": "SMP"
       }

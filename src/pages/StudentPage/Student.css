@@ -337,6 +337,42 @@
 }
 
 @media screen and (max-width: 768px) {
+  .view-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tutorial-item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .tutorial-image {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .article-title {
+    font-size: 1.3rem;
+  }
+
+  .article-meta {
+    font-size: 0.8rem;
+  }
+
+  .search-input {
+    width: 80%;
+  }
+
+  .search-button {
+    width: auto;
+    padding: 8px 15px;
+  }
+
+  .view-detail-button {
+    padding: 8px 15px;
+  }
+
   .profile-section,
   .info-section {
     max-width: 100%;
