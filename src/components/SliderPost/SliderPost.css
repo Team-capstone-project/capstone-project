@@ -140,6 +140,15 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.slider-container.dynamic {
+    justify-content: center;
+}
+
+.slider-post.dynamic {
+    width: auto;
+    max-width: 250px;
+}
+
 @media (max-width: 768px) {
     .slider-wrapper-title {
         font-size: 1.5rem;
@@ -155,5 +164,13 @@
 
     .slider-info {
         font-size: 0.8rem;
+    }
+
+    .slider-container.dynamic {
+        gap: 1rem;
+    }
+
+    .slider-post.dynamic {
+        max-width: 200px;
     }
 }
