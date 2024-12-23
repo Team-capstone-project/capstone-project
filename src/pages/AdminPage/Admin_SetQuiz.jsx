@@ -178,7 +178,7 @@ const Admin_SetQuiz = () => {
             />
           </div>
           <div className="form-group">
-            <label>Jenjang</label>
+            <label>Jenjang Sekolah</label>
             <input
               type="text"
               name="schoolType"

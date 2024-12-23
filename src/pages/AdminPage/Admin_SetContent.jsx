@@ -161,7 +161,7 @@ const Admin_SetContent = () => {
           />
           <input
             name="schoolType"
-            placeholder="SMA atau SMP"
+            placeholder="Jenjang Sekolah (Contoh: SMA)"
             value={formContent.schoolType}
             onChange={handleChange}
             className="form-input"
@@ -169,7 +169,7 @@ const Admin_SetContent = () => {
           />
           <textarea
             name="content"
-            placeholder="Isi konten (edit html)"
+            placeholder="Isi Materi (edit html)"
             value={formContent.content}
             onChange={handleChange}
             className="form-textarea"
@@ -180,7 +180,7 @@ const Admin_SetContent = () => {
           <input
             type="file"
             name="image"
-            placeholder="Choose Image"
+            placeholder="Pilih Gambar Sampul"
             onChange={handleChange}
             className="form-input-file"
           />
@@ -194,7 +194,7 @@ const Admin_SetContent = () => {
           
           <input
             name="keywords"
-            placeholder="kata kunci dipisahkan dengan koma (Contoh: Matematika, Kelas 7)"
+            placeholder="Kata Kunci (Contoh: Matematika, Kelas 7, Bangun Datar)"
             value={formContent.keywords}
             onChange={(e) => setFormContent({ ...formContent, keywords: e.target.value.split(",") })}
             className="form-input"
