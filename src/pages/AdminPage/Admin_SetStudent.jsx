@@ -20,11 +20,11 @@ const Admin_SetUser = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("authToken");
-  
+
         if (!token) {
           throw new Error("Token tidak ditemukan. Silakan login ulang.");
         }
-  
+
         const response = await axios.get(
           "https://divine-purpose-production.up.railway.app/api/user/all-users",
           {
@@ -34,18 +34,19 @@ const Admin_SetUser = () => {
             withCredentials: true,
           }
         );
-  
+
         console.log(response.data);
-  
+
         const apiData = response.data.allUser || [];
-  
+
         const formattedData = apiData.map((user) => ({
+          _id: user._id,
           firstname: user.firstname,
           lastname: user.lastname,
           profession: user.profession || "Tidak diketahui",
           email: user.email,
         }));
-  
+
         setDataSiswa(formattedData);
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -54,14 +55,33 @@ const Admin_SetUser = () => {
         setLoading(false);
       }
     };
-  
+
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (editingUser) {
+      setFormUser({
+        firstname: editingUser.firstname,
+        lastname: editingUser.lastname,
+        profession: editingUser.profession,
+        email: editingUser.email,
+        password: "", // Kosongkan password saat edit
+      });
+    } else {
+      setFormUser({
+        firstname: "",
+        lastname: "",
+        profession: "",
+        email: "",
+        password: "",
+      });
+    }
+  }, [editingUser]);
 
   const handleAdd = (newUser) => {
     setDataSiswa([...dataSiswa, newUser]);
   };
-
 
   const handleUpdate = (updatedUser) => {
     const updatedData = dataSiswa.map((user) =>
@@ -70,15 +90,48 @@ const Admin_SetUser = () => {
     setDataSiswa(updatedData);
   };
 
-
-  const handleDelete = (user) => {
-    if (window.confirm(`Apakah Anda yakin ingin menghapus ${user.firstname}?`)) {
-      setDataSiswa(dataSiswa.filter((item) => item.email !== user.email));
-      alert(`${user.firstname} telah dihapus.`);
+  const handleDelete = async (user) => {
+    console.log(user); // Tambahkan log untuk memeriksa objek user
+    if (!user._id) {
+      alert("ID pengguna tidak valid.");
+      return;
+    }
+  
+    if (window.confirm(`Apakah Anda yakin ingin menghapus pengguna "${user.firstname}"?`)) {
+      try {
+        const token = localStorage.getItem("authToken");
+  
+        if (!token) {
+          alert("Token tidak ditemukan. Silakan login ulang.");
+          return;
+        }
+  
+        // Kirim permintaan DELETE ke server
+        const response = await axios.delete(
+          `https://divine-purpose-production.up.railway.app/api/user/${user._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        // Verifikasi jika penghapusan berhasil
+        if (response.status === 200 && response.data.status) {
+          alert(`Pengguna "${user.firstname}" berhasil dihapus.`);
+  
+          // Hapus pengguna dari state secara lokal hanya jika penghapusan berhasil
+          setDataSiswa((prevData) => prevData.filter((item) => item._id !== user._id));
+        } else {
+          alert("Gagal menghapus pengguna.");
+        }
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        alert("Terjadi kesalahan saat menghapus pengguna.");
+      }
     }
   };
-
-
+  
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormUser((prev) => ({ ...prev, [name]: value }));
@@ -99,7 +152,7 @@ const Admin_SetUser = () => {
         let response;
         if (editingUser) {
           response = await axios.put(
-            `https://divine-purpose-production.up.railway.app/api/user/update/${editingUser.email}`,
+            `https://divine-purpose-production.up.railway.app/api/user/update-profile`,
             { firstname, lastname, profession, email, password },
             {
               headers: {
